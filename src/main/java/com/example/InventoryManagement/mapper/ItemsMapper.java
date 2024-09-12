@@ -9,4 +9,6 @@ import java.util.List;
 public interface ItemsMapper {
 
     List<Items> itemsSelectAll();
+
+    void itemAdd(Items items);
 }
