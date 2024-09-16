@@ -2,6 +2,7 @@ package com.example.InventoryManagement.controller;
 
 
 import com.example.InventoryManagement.domain.Items;
+import com.example.InventoryManagement.form.ItemRequestForm;
 import com.example.InventoryManagement.service.ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,15 +31,23 @@ public class ItemsController {
     }
 
     @GetMapping("form")
-    public String newItem(@RequestBody(required = false) Model model) {
+    public String newItem(Model model, ItemRequestForm itemRequestForm) {
+       Items items = new Items();
+       // TODO: ItemRequestFormを作成。
+       items.setCategory(itemRequestForm.getCategory());
+       items.setItem(itemRequestForm.getItem());
+        model.addAttribute("itemDetail", items);
+//    public String newItem(@RequestBody(required = false) Model model) {
         return "items/form";
     }
     @PostMapping("itemRequestEdit")
-    public String formItemAdd(@ModelAttribute Items items, BindingResult bindingResult, Model model) {
+    public String formItemAdd(@ModelAttribute Items items, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            return "items/index";
+//            List<Items> itemsList = itemsService.getSelectAll();
+//            model.addAttribute("item", itemsList);
+            return "items/form";
         }
         itemsService.requestItemAdd(items);
-        return "redirect:itemRequestEdit";
+        return "redirect:index";
     }
 }

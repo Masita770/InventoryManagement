@@ -9,13 +9,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface ItemsService {
+@Service
+@Transactional
+public class ItemServiceImpl implements ItemsService{
 
+    @Autowired
+    ItemsMapper itemsMapper;
 
-    List<Items> getSelectAll();
+    @Override
+    public List<Items> getSelectAll() {
+        return itemsMapper.itemsSelectAll();
+    }
 
-    @Transactional
-    void requestItemAdd(Items items);
-
+    @Override
+    public void requestItemAdd(Items items) {
+        itemsMapper.itemAdd(items);
+    }
 }
-
