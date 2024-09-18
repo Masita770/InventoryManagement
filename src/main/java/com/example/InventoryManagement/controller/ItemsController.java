@@ -32,7 +32,7 @@ public class ItemsController {
 
     @GetMapping("form")
     public String newItem(Model model, ItemRequestForm itemRequestForm) {
-       Items items = new Items();
+       Items items = new Items(1, "desk", "gamingDesk", 2024 / 04 / 22, 2024 - 04 - 27 - 12 - 00 - 00 - 00);
        // TODO: ItemRequestFormを作成。
        items.setCategory(itemRequestForm.getCategory());
        items.setItem(itemRequestForm.getItem());
