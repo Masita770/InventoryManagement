@@ -36,13 +36,13 @@
 
             <th th:text="${items.item}"></th>
 
-            <th th:text="${#temporals.format(items.registrationDate, 'yyyy-MM-dd HH:mm')}"></th>
+            <th th:text="${items.registrationDate}"></th>
 
             <th th:text="${items.deletedDate}"></th>
 
             <!--        <th th:text="${product.inventory}"></th>-->
 
-<!--            <td><a class="btn btn-outline-primary btn-sm" th:href="@{/{id}(id=${product.id})}">参照</a></td>-->
+            <td><a class="btn btn-outline-primary btn-sm" th:href="@{itemDetail/{id}(id=${items.id})}">参照</a></td>
 
 
         </tr>

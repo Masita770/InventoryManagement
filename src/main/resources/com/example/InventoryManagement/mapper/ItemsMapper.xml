@@ -4,11 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.InventoryManagement.mapper.ItemsMapper">
 
-    <select id="itemsSelectAll" resultType="com.example.InventoryManagement.domain.Items">
-        SELECT * FROM items
+    <select id="itemsSelectAll" resultMap="itemsMap">
+        SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items  INNER JOIN stocks ON items.id = stocks.items_id
+    </select>
+    <select id="itemsSelectOne" resultMap="itemsMap">
+        SELECT id, category, item, registration_date, deleted_date FROM items WHERE id = #{id}
     </select>
     <insert id="itemAdd" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO items(category, item) VALUES (#{category}, #{item})
+<!--        INSERT INTO items(category, item) VALUES (#{category}, #{item})-->
+<!--        INSERT INTO items(items.id, items.category, items.item, stocks.id, stocks.items_id, stocks.quantity)-->
+<!--        VALUES (#{items.category}, #{items.item}, #{stocks.items_id}, #{stocks.quantity}) INNER JOIN stocks ON items.id = stocks.items_id-->
     </insert>
 
 <!--    <select id="selectAll" resultMap="stockMap">-->
@@ -72,27 +77,19 @@
 <!--    </update>-->
 
 
-<!--    <resultMap type="com.example.domain.Products" id="stockMap">-->
-<!--        <id property="id" column="id" />-->
-<!--        <result property="pNumber" column="p_number" />-->
-<!--        <result property="product" column="product" />-->
-<!--        <result property="category" column="category" />-->
-<!--        <result property="price" column="price" />-->
-<!--        <association property="stockList" resultMap="stock" />-->
-<!--        &lt;!&ndash;        <collection property="stockList" resultMap="stock" foreignColumn="product_id" />&ndash;&gt;-->
-<!--    </resultMap>-->
-<!--    <resultMap type="com.example.domain.Stocks" id="stock" >-->
-<!--        <id property="id" column="id" />-->
-<!--        <result property="productId" column="product_id" />-->
-<!--        <result property="inventory" column="inventory" />-->
-<!--        <result property="updateDate" column="update_date" />-->
+    <resultMap type="com.example.InventoryManagement.domain.Items" id="itemsMap">
+        <id property="id" column="id" />
+        <result property="category" column="category" />
+        <result property="item" column="item" />
+        <result property="registrationDate" column="registration_date" />
+        <result property="deletedDate" column="deleted_date" />
+<!--        <association property="stockList" resultMap="stockMap" />-->
+    </resultMap>
+    <resultMap type="com.example.InventoryManagement.domain.Stocks" id="stockMap" >
+        <id property="id" column="id" />
+        <result property="itemsId" column="items_id" />
+        <result property="quantity" column="quantity" />
+        <result property="updateDate" column="update_date" />
 <!--        <association property="orderList" resultMap="order" />-->
-<!--    </resultMap>-->
-<!--    <resultMap id="order" type="com.example.domain.Orders">-->
-<!--        <id property="id" column="id" />-->
-<!--        <result property="stocksId" column="stocks_id" />-->
-<!--        <result property="ordersNumber" column="orders_number" />-->
-<!--        <result property="orderDate" column="order_date" />-->
-<!--        <result property="deliveryDate" column="delivery_date" />-->
-<!--    </resultMap>-->
+    </resultMap>
 </mapper>

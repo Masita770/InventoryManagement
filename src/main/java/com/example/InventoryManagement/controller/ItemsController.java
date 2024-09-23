@@ -4,6 +4,7 @@ package com.example.InventoryManagement.controller;
 import com.example.InventoryManagement.domain.Items;
 import com.example.InventoryManagement.form.ItemRequestForm;
 import com.example.InventoryManagement.service.ItemsService;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/items")
@@ -30,13 +32,21 @@ public class ItemsController {
         return "items/index";
     }
 
+    @GetMapping("itemDetail/{id}")
+    public String itemsOne(@PathVariable("id")int id, Model model) throws NotFoundException {
+        Optional<Items> itemsOne = itemsService.getSelectOne(id);
+        itemsOne.ifPresentOrElse(inside -> model.addAttribute("item", inside), () ->
+                model.addAttribute("not", itemsOne)
+        );
+        return "items/itemDetail";
+    }
+
     @GetMapping("form")
-    public String newItem(Model model, ItemRequestForm itemRequestForm) {
-       Items items = new Items(1, "desk", "gamingDesk", 2024 / 04 / 22, 2024 - 04 - 27 - 12 - 00 - 00 - 00);
-       // TODO: ItemRequestFormを作成。
+    public String newItem(Model model, Items items) {
+        ItemRequestForm itemRequestForm = new ItemRequestForm();
        items.setCategory(itemRequestForm.getCategory());
        items.setItem(itemRequestForm.getItem());
-        model.addAttribute("itemDetail", items);
+        model.addAttribute("select", items);
 //    public String newItem(@RequestBody(required = false) Model model) {
         return "items/form";
     }

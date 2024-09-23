@@ -1,16 +1,41 @@
 package com.example.InventoryManagement.service;
 
 
+import com.example.InventoryManagement.domain.Items;
+import com.example.InventoryManagement.domain.Stocks;
+import com.example.InventoryManagement.mapper.ItemsMapper;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ItemsServiceTest {
 
+    @InjectMocks
+    ItemServiceImpl itemsService;
 
-    @Test//
+    @Mock
+    ItemsMapper itemsMapper;
+
+
+    @Test
     void データ一覧を取得できるか検証() {
-
+        List<Items> itemsList = List.of(
+                new Items(1, "机", "オフィスデスク", "0000-00-00 00:00:00","0000-00-00 00:00:00", new Stocks(1, 1, 5, "2024-09-23 20:24:37")),
+                new Items(2, "机", "オフィスデスク", "0000-00-00 00:00:00", "0000-00-00 00:00:00", new Stocks(2, 2, 10, "2024-09-23 20:25:03")),
+                new Items(3, "机", "ゲーミングデスク", "2024-09-16 22:36:15", "0000-00-00 00:00:00", new Stocks(3, 3, 7, "2024-09-23 20:25:26"))
+        );
+        doReturn(itemsList).when(itemsMapper).itemsSelectAll();
+        List<Items> actual = itemsService.getSelectAll();
+        Assertions.assertThat(actual).isEqualTo(itemsList);
+        verify(itemsMapper, times(1)).itemsSelectAll();
     }
 }

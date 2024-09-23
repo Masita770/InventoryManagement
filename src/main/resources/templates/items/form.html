@@ -40,15 +40,18 @@
 </table>
 
 <form th:action="@{/items/itemRequestEdit}" method="post" th:object="${newItem}">
-    <div th:object="${itemDetail}">
+    <div th:object="${select}">
         <div class="row">
             <div class="form-group col-3 m-2">
                 <label class="form-label">種類</label>
-                <input class="form-control" type="text" th:field="*{category}" required/>
-<!--                <input class="form-control" type="text" id="category" required/>-->
+<!--                <input class="form-control" type="text" th:field="*{category}" required/>-->
+                <input class="form-control" type="text" id="category" required/>
                 <label class="control-label">品目</label>
-                <input class="form-control" type="text" th:field="*{item}" required/>
-<!--                <input class="form-control" type="text" id="item" required/>-->
+<!--                <input class="form-control" type="text" th:field="*{item}" required/>-->
+                <input class="form-control" type="text" id="item" required/>
+                <label class="control-label">個数</label>
+                <input class="form-control" type="text" id="quantity" required/>
+<!--                <input class="form-control" type="text" th:field="*{stocks.quantity}">-->
             </div>
         </div>
     </div>

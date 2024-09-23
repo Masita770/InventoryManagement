@@ -8,11 +8,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ItemsService {
 
 
     List<Items> getSelectAll();
+
+    @Transactional
+    Optional<Items> getSelectOne(int id);
 
     @Transactional
     void requestItemAdd(Items items);

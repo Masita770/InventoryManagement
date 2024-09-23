@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -19,6 +20,11 @@ public class ItemServiceImpl implements ItemsService{
     @Override
     public List<Items> getSelectAll() {
         return itemsMapper.itemsSelectAll();
+    }
+
+    @Override
+    public Optional<Items> getSelectOne(int id) {
+        return itemsMapper.itemsSelectOne(id);
     }
 
     @Override
