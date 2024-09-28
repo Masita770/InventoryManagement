@@ -2,6 +2,7 @@ package com.example.InventoryManagement.service;
 
 
 import com.example.InventoryManagement.domain.Items;
+import com.example.InventoryManagement.domain.Stocks;
 import com.example.InventoryManagement.mapper.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,7 @@ public interface ItemsService {
     @Transactional
     void requestItemAdd(Items items);
 
+    @Transactional
+    void itemDetailUpdate(Stocks stocks);
 }
 

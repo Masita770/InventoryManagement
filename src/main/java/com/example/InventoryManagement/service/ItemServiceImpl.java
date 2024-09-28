@@ -2,6 +2,7 @@ package com.example.InventoryManagement.service;
 
 
 import com.example.InventoryManagement.domain.Items;
+import com.example.InventoryManagement.domain.Stocks;
 import com.example.InventoryManagement.mapper.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,10 @@ public class ItemServiceImpl implements ItemsService{
     @Override
     public void requestItemAdd(Items items) {
         itemsMapper.itemAdd(items);
+    }
+
+    @Override
+    public void itemDetailUpdate(Stocks stocks) {
+        itemsMapper.itemDetailUpdate(stocks);
     }
 }

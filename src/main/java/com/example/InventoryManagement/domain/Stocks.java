@@ -1,7 +1,10 @@
 package com.example.InventoryManagement.domain;
 
+import lombok.Data;
+
 import java.sql.Timestamp;
 
+@Data
 public class Stocks {
     private int id;
     private int itemsId;

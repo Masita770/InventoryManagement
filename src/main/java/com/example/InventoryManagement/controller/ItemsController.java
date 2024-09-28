@@ -2,10 +2,12 @@ package com.example.InventoryManagement.controller;
 
 
 import com.example.InventoryManagement.domain.Items;
+import com.example.InventoryManagement.domain.Stocks;
 import com.example.InventoryManagement.form.ItemRequestForm;
 import com.example.InventoryManagement.service.ItemsService;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -50,6 +52,7 @@ public class ItemsController {
 //    public String newItem(@RequestBody(required = false) Model model) {
         return "items/form";
     }
+    //TODO: 品番登録後、個数入力できるようにする
     @PostMapping("itemRequestEdit")
     public String formItemAdd(@ModelAttribute Items items, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -59,5 +62,24 @@ public class ItemsController {
         }
         itemsService.requestItemAdd(items);
         return "redirect:index";
+    }
+    //TODO: 同様の個数入力用の処理を書く
+
+    @GetMapping("itemQuantity/{id}")
+    public String itemUpdate(@PathVariable("id") int id, Model model) {
+        Optional<Items> quantityUpdate = itemsService.getSelectOne(id);
+        quantityUpdate.ifPresentOrElse(inside -> {
+            model.addAttribute("itemUpdate", inside);
+        }, () -> {
+            System.out.println();
+        });
+        return "items/itemQuantity";
+    }
+    @RequestMapping("itemsRequestEdit/{id}")
+    public String requestItemUpdate(@PathVariable("id") int id, @ModelAttribute Stocks stocks, Model model) {
+        stocks.setId(id);
+        itemsService.itemDetailUpdate(stocks);
+        return "items/itemRequestEdit";
+        //TODO: 個数入力を更新処理で実現
     }
 }
