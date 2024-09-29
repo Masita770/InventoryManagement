@@ -16,5 +16,7 @@ public interface ItemsMapper {
 
     void itemAdd(Items items);
 
+    Optional<Stocks> stockSelectOne(int id);
+
     void itemDetailUpdate(Stocks stocks);
 }

@@ -11,6 +11,9 @@
         SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items
         INNER JOIN stocks ON items.id = stocks.items_id WHERE items.id = #{id}
     </select>
+    <select id="stockSelectOne" resultMap="stockMap">
+        SELECT id, items_id, quantity, update_date FROM stocks WHERE id = #{id}
+    </select>
     <insert id="itemAdd" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO items(category, item) VALUES (#{category}, #{item})
 <!--        INSERT INTO items(items.id, items.category, items.item, stocks.id, stocks.items_id, stocks.quantity)-->
@@ -32,8 +35,8 @@
 <!--    <insert id="requestAdd" useGeneratedKeys="true" keyProperty="id">-->
 <!--        INSERT into orders(id, stocks_id, orders_number, order_date, delivery_date) values (#{id}, #{stocksId}, #{ordersNumber}, #{orderDate}, #{deliveryDate})-->
 <!--    </insert>-->
-    <update id="update">-->
-        UPDATE stocks SET quantity = #{quantity} WHERE id = #{id}
+    <update id="itemDetailUpdate">-->
+        UPDATE stocks SET items_id = #{itemsId}, quantity = #{quantity} WHERE id = #{id}
     </update>
 <!--    <delete id="delete">-->
 <!--        DELETE FROM products WHERE id = #{id}-->

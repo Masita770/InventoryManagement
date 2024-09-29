@@ -1,10 +1,12 @@
 package com.example.InventoryManagement.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
 @Data
+@NoArgsConstructor
 public class Stocks {
     private int id;
     private int itemsId;

@@ -66,15 +66,23 @@ public class ItemsController {
     //TODO: 同様の個数入力用の処理を書く
 
     @GetMapping("itemQuantity/{id}")
-    public String itemUpdate(@PathVariable("id") int id, Model model) {
-        Optional<Items> quantityUpdate = itemsService.getSelectOne(id);
-        quantityUpdate.ifPresentOrElse(inside -> {
-            model.addAttribute("itemUpdate", inside);
-        }, () -> {
-            System.out.println();
-        });
+    public String stocksOne(@PathVariable("id")int id, Model model) {
+        Optional<Stocks> stocksOne = itemsService.getStockOne(id);
+        stocksOne.ifPresentOrElse(inside -> model.addAttribute("stock", inside), ()
+        -> model.addAttribute("error", stocksOne));
         return "items/itemQuantity";
     }
+
+//    @GetMapping("itemQuantity/{id}")
+//    public String itemUpdate(@PathVariable("id") int id, Model model) {
+//        Optional<Stocks> quantityUpdate = itemsService.getStockOne(id);
+//         quantityUpdate.ifPresentOrElse(inside -> {
+//            model.addAttribute("itemUpdate", inside);
+//        }, () -> {
+//            System.out.println();
+//        });
+//        return "items/itemQuantity";
+//    }
     @RequestMapping("itemsRequestEdit/{id}")
     public String requestItemUpdate(@PathVariable("id") int id, @ModelAttribute Stocks stocks, Model model) {
         stocks.setId(id);
