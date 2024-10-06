@@ -35,8 +35,8 @@
 <!--    <insert id="requestAdd" useGeneratedKeys="true" keyProperty="id">-->
 <!--        INSERT into orders(id, stocks_id, orders_number, order_date, delivery_date) values (#{id}, #{stocksId}, #{ordersNumber}, #{orderDate}, #{deliveryDate})-->
 <!--    </insert>-->
-    <update id="itemDetailUpdate">-->
-        UPDATE stocks SET items_id = #{itemsId}, quantity = #{quantity} WHERE id = #{id}
+    <update id="itemDetailUpdate">
+        UPDATE items inner join ON items.id = stocks.items_id stocks inner join orders ON stocks.id = orders.stocks_id WHERE stocks.id = #{id}
     </update>
 <!--    <delete id="delete">-->
 <!--        DELETE FROM products WHERE id = #{id}-->
