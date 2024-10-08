@@ -83,6 +83,7 @@ public class ItemsController {
 //        });
 //        return "items/itemQuantity";
 //    }
+    //TODO: 検索条件を複数にして実行。
     @RequestMapping("itemsRequestEdit/{id}")
     public String requestItemUpdate(@PathVariable("id") int id, @ModelAttribute Stocks stocks, Model model) {
         stocks.setId(id);
