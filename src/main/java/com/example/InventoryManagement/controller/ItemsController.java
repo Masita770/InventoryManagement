@@ -67,7 +67,7 @@ public class ItemsController {
 
     @GetMapping("itemQuantity/{id}")
     public String stocksOne(@PathVariable("id")int id, Model model) {
-        Optional<Stocks> stocksOne = itemsService.getStockOne(id);
+        Optional<Items> stocksOne = itemsService.getSelectOne(id);
         stocksOne.ifPresentOrElse(inside -> model.addAttribute("stock", inside), ()
         -> model.addAttribute("error", stocksOne));
         return "items/itemQuantity";
@@ -85,9 +85,9 @@ public class ItemsController {
 //    }
     //TODO: 検索条件を複数にして実行。
     @RequestMapping("itemsRequestEdit/{id}")
-    public String requestItemUpdate(@PathVariable("id") int id, @ModelAttribute Stocks stocks, Model model) {
-        stocks.setId(id);
-        itemsService.itemDetailUpdate(stocks);
+    public String requestItemUpdate(@PathVariable("id") int id, @ModelAttribute Items items, Model model) {
+        items.setId(id);
+        itemsService.itemDetailUpdate(items);
         return "items/itemRequestEdit";
         //TODO: 個数入力を更新処理で実現
     }
