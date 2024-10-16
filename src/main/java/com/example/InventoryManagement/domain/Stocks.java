@@ -12,11 +12,13 @@ public class Stocks {
     private int itemsId;
     private int quantity;
     private String updateDate;
+    Orders ordersList;
 
-    public Stocks(int id, int itemsId, int quantity, String updateDate) {
+    public Stocks(int id, int itemsId, int quantity, String updateDate, Orders ordersList) {
         this.id = id;
         this.itemsId = itemsId;
         this.quantity = quantity;
         this.updateDate = updateDate;
+        this.ordersList = ordersList;
     }
 }

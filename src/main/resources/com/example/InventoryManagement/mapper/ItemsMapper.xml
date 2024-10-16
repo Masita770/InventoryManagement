@@ -12,7 +12,9 @@
         INNER JOIN stocks ON items.id = stocks.items_id WHERE items.id = #{id}
     </select>
     <select id="stockSelectOne" resultMap="stockMap">
-        SELECT id, items_id, quantity, update_date FROM stocks WHERE id = #{id}
+<!--        SELECT id, items_id, quantity, update_date FROM stocks WHERE id = #{id}-->
+        SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items
+        INNER JOIN stocks ON items.id = stocks.items_id WHERE items.id = #{id}
     </select>
     <insert id="itemAdd" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO items(category, item) VALUES (#{category}, #{item})
@@ -36,7 +38,10 @@
 <!--        INSERT into orders(id, stocks_id, orders_number, order_date, delivery_date) values (#{id}, #{stocksId}, #{ordersNumber}, #{orderDate}, #{deliveryDate})-->
 <!--    </insert>-->
     <update id="itemDetailUpdate">
-        UPDATE items inner join ON items.id = stocks.items_id stocks inner join orders ON stocks.id = orders.stocks_id WHERE stocks.id = #{id}
+        UPDATE items inner join stocks ON items.id = stocks.items_id
+                INNER JOIN orders ON stocks.id = orders.stocks_id
+                SET stocks.quantity = stocks.quantity + orders.order_date
+                WHERE stocks.id = #{id}
     </update>
 <!--    <delete id="delete">-->
 <!--        DELETE FROM products WHERE id = #{id}-->
@@ -87,13 +92,19 @@
         <result property="item" column="item" />
         <result property="registrationDate" column="registration_date" />
         <result property="deletedDate" column="deleted_date" />
-<!--        <association property="stockList" resultMap="stockMap" />-->
+        <association property="stocksList" resultMap="stockMap" />
     </resultMap>
     <resultMap type="com.example.InventoryManagement.domain.Stocks" id="stockMap" >
         <id property="id" column="id" />
         <result property="itemsId" column="items_id" />
         <result property="quantity" column="quantity" />
         <result property="updateDate" column="update_date" />
-<!--        <association property="orderList" resultMap="order" />-->
+<!--        <association property="ordersList" resultMap="orderMap" />-->
     </resultMap>
+<!--    <resultMap type="come.example.InventoryManagement.domain.Orders" id="orderMap">-->
+<!--        <id property="id" column="id" />-->
+<!--&lt;!&ndash;        <result property="itemsId" column="items_id" />&ndash;&gt;-->
+<!--        <result property="stocksId" column="stocks_id" />-->
+<!--        <result property="orderDate" column="order_date" />-->
+<!--    </resultMap>-->
 </mapper>

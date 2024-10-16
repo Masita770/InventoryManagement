@@ -38,7 +38,7 @@ public class ItemServiceImpl implements ItemsService{
         return itemsMapper.stockSelectOne(id);
     }
     @Override
-    public void itemDetailUpdate(Stocks stocks) {
-        itemsMapper.itemDetailUpdate(stocks);
+    public void itemDetailUpdate(Items items) {
+        itemsMapper.itemDetailUpdate(items);
     }
 }

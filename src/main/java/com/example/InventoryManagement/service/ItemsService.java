@@ -26,6 +26,6 @@ public interface ItemsService {
     @Transactional
     Optional<Stocks> getStockOne(int id);
     @Transactional
-    void itemDetailUpdate(Stocks stocks);
+    void itemDetailUpdate(Items items);
 }
 

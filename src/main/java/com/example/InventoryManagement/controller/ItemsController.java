@@ -65,30 +65,30 @@ public class ItemsController {
     }
     //TODO: 同様の個数入力用の処理を書く
 
-    @GetMapping("itemQuantity/{id}")
-    public String stocksOne(@PathVariable("id")int id, Model model) {
-        Optional<Items> stocksOne = itemsService.getSelectOne(id);
-        stocksOne.ifPresentOrElse(inside -> model.addAttribute("stock", inside), ()
-        -> model.addAttribute("error", stocksOne));
-        return "items/itemQuantity";
-    }
-
 //    @GetMapping("itemQuantity/{id}")
-//    public String itemUpdate(@PathVariable("id") int id, Model model) {
-//        Optional<Stocks> quantityUpdate = itemsService.getStockOne(id);
-//         quantityUpdate.ifPresentOrElse(inside -> {
-//            model.addAttribute("itemUpdate", inside);
-//        }, () -> {
-//            System.out.println();
-//        });
+//    public String stocksOne(@PathVariable("id")int id, Model model) {
+//        Optional<Items> stocksOne = itemsService.getSelectOne(id);
+//        stocksOne.ifPresentOrElse(inside -> model.addAttribute("stock", inside), ()
+//        -> model.addAttribute("error", stocksOne));
 //        return "items/itemQuantity";
 //    }
-    //TODO: 検索条件を複数にして実行。
-    @RequestMapping("itemsRequestEdit/{id}")
-    public String requestItemUpdate(@PathVariable("id") int id, @ModelAttribute Items items, Model model) {
-        items.setId(id);
-        itemsService.itemDetailUpdate(items);
-        return "items/itemRequestEdit";
-        //TODO: 個数入力を更新処理で実現
+
+    @GetMapping("itemQuantityUpdate/{id}")
+    public String itemUpdate(@PathVariable("id") int id, Model model) {
+        Optional<Items> quantityUpdate = itemsService.getSelectOne(id);
+        quantityUpdate.ifPresentOrElse(inside -> {
+            model.addAttribute("itemUpdate", inside);
+        }, () -> {
+            System.out.println();
+        });
+        return "items/itemQuantityUpdate";
     }
+        //TODO: 検索条件を複数にして実行。
+        @RequestMapping("itemsRequestEdit/{id}")
+        public String requestItemUpdate ( @PathVariable("id") int id, @ModelAttribute Items items, Model model){
+            items.setId(id);
+            itemsService.itemDetailUpdate(items);
+            return "items/itemRequestEdit";
+            //TODO: 個数入力を更新処理で実現
+        }
 }
