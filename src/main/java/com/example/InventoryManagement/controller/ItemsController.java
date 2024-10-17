@@ -83,7 +83,7 @@ public class ItemsController {
         });
         return "items/itemQuantityUpdate";
     }
-        //TODO: 検索条件を複数にして実行。
+        //TODO: 検索条件を複数にして実行。 在庫数と注文数を合計するUPDATE文を記入
         @RequestMapping("itemsRequestEdit/{id}")
         public String requestItemUpdate ( @PathVariable("id") int id, @ModelAttribute Items items, Model model){
             items.setId(id);
