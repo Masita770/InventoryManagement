@@ -49,29 +49,19 @@ public class ItemsController {
        items.setCategory(itemRequestForm.getCategory());
        items.setItem(itemRequestForm.getItem());
         model.addAttribute("select", items);
-//    public String newItem(@RequestBody(required = false) Model model) {
         return "items/form";
     }
     //TODO: 品番登録後、個数入力できるようにする
     @PostMapping("itemRequestEdit")
-    public String formItemAdd(@ModelAttribute Items items, BindingResult bindingResult) {
+    public String formItemAdd(@ModelAttribute Items items, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
-//            List<Items> itemsList = itemsService.getSelectAll();
-//            model.addAttribute("item", itemsList);
+            List<Items> itemsList = itemsService.getSelectAll();
+            model.addAttribute("item", itemsList);
             return "items/form";
         }
         itemsService.requestItemAdd(items);
         return "redirect:index";
     }
-    //TODO: 同様の個数入力用の処理を書く
-
-//    @GetMapping("itemQuantity/{id}")
-//    public String stocksOne(@PathVariable("id")int id, Model model) {
-//        Optional<Items> stocksOne = itemsService.getSelectOne(id);
-//        stocksOne.ifPresentOrElse(inside -> model.addAttribute("stock", inside), ()
-//        -> model.addAttribute("error", stocksOne));
-//        return "items/itemQuantity";
-//    }
 
     @GetMapping("itemQuantityUpdate/{id}")
     public String itemUpdate(@PathVariable("id") int id, Model model) {
@@ -83,9 +73,8 @@ public class ItemsController {
         });
         return "items/itemQuantityUpdate";
     }
-        //TODO: 検索条件を複数にして実行。 在庫数と注文数を合計するUPDATE文を記入
         @RequestMapping("itemsRequestEdit/{id}")
-        public String requestItemUpdate ( @PathVariable("id") int id, @ModelAttribute Items items, Model model){
+        public String itemRequestUpdate ( @PathVariable("id") int id, @ModelAttribute Items items, Model model){
             items.setId(id);
             itemsService.itemDetailUpdate(items);
             return "items/itemRequestEdit";

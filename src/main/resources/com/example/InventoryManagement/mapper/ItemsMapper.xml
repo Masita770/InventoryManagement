@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.InventoryManagement.mapper.ItemsMapper">
 
-    <select id="itemsSelectAll" resultMap="itemsMap">
+    <select id="itemsSelectAll" resultMap="itemsMap" resultType="com.example.InventoryManagement.domain.Items">
         SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items  INNER JOIN stocks ON items.id = stocks.items_id
     </select>
     <select id="itemsSelectOne" resultMap="itemsMap">
@@ -12,79 +12,12 @@
         INNER JOIN stocks ON items.id = stocks.items_id WHERE items.id = #{id}
     </select>
     <select id="stockSelectOne" resultMap="stockMap">
-<!--        SELECT id, items_id, quantity, update_date FROM stocks WHERE id = #{id}-->
         SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items
         INNER JOIN stocks ON items.id = stocks.items_id WHERE items.id = #{id}
     </select>
     <insert id="itemAdd" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO items(category, item) VALUES (#{category}, #{item})
-<!--        INSERT INTO items(items.id, items.category, items.item, stocks.id, stocks.items_id, stocks.quantity)-->
-<!--        VALUES (#{items.category}, #{items.item}, #{stocks.items_id}, #{stocks.quantity}) INNER JOIN stocks ON items.id = stocks.items_id-->
     </insert>
-
-<!--    <select id="selectAll" resultMap="stockMap">-->
-<!--        SELECT products.id, products.p_number, products.product, products.price, stocks.product_id, stocks.inventory FROM products  INNER JOIN stocks ON products.id = stocks.product_id-->
-<!--    </select>-->
-
-<!--    <select id="selectOne" resultMap="stockMap">-->
-<!--        SELECT products.id, products.p_number, products.product, products.category, products.price, products.registration_date, products.deleted_date,-->
-<!--        stocks.id, stocks.product_id, stocks.inventory,-->
-<!--        orders.id, orders.stocks_id, orders.orders_number-->
-<!--        FROM products INNER JOIN stocks ON products.id = stocks.product_id-->
-<!--        INNER JOIN orders ON stocks.id = orders.stocks_id-->
-<!--        WHERE products.id = #{id}-->
-<!--    </select>-->
-<!--    <insert id="requestAdd" useGeneratedKeys="true" keyProperty="id">-->
-<!--        INSERT into orders(id, stocks_id, orders_number, order_date, delivery_date) values (#{id}, #{stocksId}, #{ordersNumber}, #{orderDate}, #{deliveryDate})-->
-<!--    </insert>-->
-    <update id="itemDetailUpdate">
-        UPDATE items inner join stocks ON items.id = stocks.items_id
-                INNER JOIN orders ON stocks.id = orders.stocks_id
-                SET stocks.quantity = stocks.quantity + orders.order_date
-                WHERE stocks.id = #{id}
-    </update>
-<!--    <delete id="delete">-->
-<!--        DELETE FROM products WHERE id = #{id}-->
-<!--    </delete>-->
-<!--    &lt;!&ndash;7/22 orderAllをorderSelectに修正&ndash;&gt;-->
-<!--    <select id="orderSelect" resultMap="stockMap">-->
-<!--        &lt;!&ndash;        SELECT * FROM products INNER JOIN &ndash;&gt;-->
-<!--        SELECT-->
-<!--        products.id, products.p_number, products.product, products.price, stocks.id,-->
-<!--        orders.id, orders.stocks_id, orders.orders_number-->
-<!--        FROM products-->
-<!--        INNER JOIN stocks ON-->
-<!--        products.id = stocks.product_id-->
-<!--        INNER JOIN orders ON-->
-<!--        stocks.product_id = orders.stocks_id-->
-<!--        AND products.id = #{id}-->
-<!--    </select>-->
-
-<!--    &lt;!&ndash;    <update id="receivingStock">&ndash;&gt;-->
-<!--    &lt;!&ndash;        UPDATE products.id, products.p_number, products.product, products.price, stocks.id, stocks.inventory, stocks.update_date,&ndash;&gt;-->
-<!--    &lt;!&ndash;            orders.id, orders.stocks_id, orders.orders_number&ndash;&gt;-->
-<!--    &lt;!&ndash;            FROM products&ndash;&gt;-->
-<!--    &lt;!&ndash;            INNER JOIN stocks ON&ndash;&gt;-->
-<!--    &lt;!&ndash;            products.id = stocks.id&ndash;&gt;-->
-<!--    &lt;!&ndash;            INNER JOIN orders ON&ndash;&gt;-->
-<!--    &lt;!&ndash;            stocks.id = orders.stocks_id&ndash;&gt;-->
-<!--    &lt;!&ndash;            stocks.inventory, stocks.update_date&ndash;&gt;-->
-<!--    &lt;!&ndash;            WHERE&ndash;&gt;-->
-<!--    &lt;!&ndash;            stocks.inventory = #{inventory}&ndash;&gt;-->
-<!--    &lt;!&ndash;&lt;!&ndash;            AND product.id = #{id}&ndash;&gt;&ndash;&gt;-->
-<!--    &lt;!&ndash;    </update>&ndash;&gt;-->
-<!--    <update id="receivingStock">-->
-<!--        UPDATE products INNER JOIN stocks ON products.id = stocks.product_id-->
-<!--        INNER JOIN orders ON stocks.product_id = orders.stocks_id-->
-<!--        &lt;!&ndash;        SET inventory = #{stockList.inventory} + order_date = #{stockList.orderList.orderDate}&ndash;&gt;-->
-<!--        SET stocks.inventory = #{stockList.inventory} + #{stockList.orderList.orderDate}, products.p_number = #{pNumber}, products.product = #{product}, products.category = #{category}, products.price = #{price}, products.registration_date = #{registrationDate}, products.deleted_date = #{deletedDate},-->
-<!--        stocks.product_id = #{productId}, stocks.update_date = #{updateDate},-->
-<!--        orders.stocks_id = #{stocksId}, orders.orders_number = #{ordersNumber}, orders.order_date = {orderDate}, orders.delivery_date = #{deliveryDate}-->
-<!--        &lt;!&ndash;        WHERE inventory = #{stockList.inventory} + #{stockList.orderList.orderDate}&ndash;&gt;-->
-<!--        &lt;!&ndash;            SET stocks.inventory = #{stockList.inventory} + #{stockList.orderList.orderDate}&ndash;&gt;-->
-<!--        WHERE products.id = #{id}-->
-<!--    </update>-->
-
 
     <resultMap type="com.example.InventoryManagement.domain.Items" id="itemsMap">
         <id property="id" column="id" />
@@ -92,19 +25,20 @@
         <result property="item" column="item" />
         <result property="registrationDate" column="registration_date" />
         <result property="deletedDate" column="deleted_date" />
-        <association property="stocksList" resultMap="stockMap" />
+        <association property="stocksList" resultMap="stockMap"></association>
+        <collection property="ordersList" resultMap="orderMap"></collection>
     </resultMap>
     <resultMap type="com.example.InventoryManagement.domain.Stocks" id="stockMap" >
         <id property="id" column="id" />
         <result property="itemsId" column="items_id" />
         <result property="quantity" column="quantity" />
         <result property="updateDate" column="update_date" />
-<!--        <association property="ordersList" resultMap="orderMap" />-->
+        <association property="ordersList" resultMap="orderMap"></association>
     </resultMap>
-<!--    <resultMap type="come.example.InventoryManagement.domain.Orders" id="orderMap">-->
-<!--        <id property="id" column="id" />-->
-<!--&lt;!&ndash;        <result property="itemsId" column="items_id" />&ndash;&gt;-->
-<!--        <result property="stocksId" column="stocks_id" />-->
-<!--        <result property="orderDate" column="order_date" />-->
-<!--    </resultMap>-->
+    <resultMap type="come.example.InventoryManagement.domain.Orders" id="orderMap">
+        <id property="id" column="id" />
+        <result property="itemsId" column="items_id" />
+        <result property="stocksId" column="stocks_id" />
+        <result property="orderDate" column="order_date" />
+    </resultMap>
 </mapper>
