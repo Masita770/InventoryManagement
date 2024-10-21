@@ -35,10 +35,11 @@
         <result property="updateDate" column="update_date" />
         <association property="ordersList" resultMap="orderMap"></association>
     </resultMap>
-    <resultMap type="come.example.InventoryManagement.domain.Orders" id="orderMap">
+    <resultMap type="com.example.InventoryManagement.domain.Orders" id="orderMap">
         <id property="id" column="id" />
         <result property="itemsId" column="items_id" />
         <result property="stocksId" column="stocks_id" />
         <result property="orderDate" column="order_date" />
+        <result property="deliveryDate" column="delivery_date" />
     </resultMap>
 </mapper>
