@@ -18,6 +18,11 @@
     <insert id="itemAdd" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO items(category, item) VALUES (#{category}, #{item})
     </insert>
+    <update id="itemDetailUpdate">
+        UPDATE items SET FROM INNER JOIN stocks ON items.id = stocks.items_id INNER JOIN stocks.id = orders.stocks_id
+        SET stocks.quantity = #{quantity} + #{ order_date}
+        WHERE items.id = #{id}
+    </update>
 
     <resultMap type="com.example.InventoryManagement.domain.Items" id="itemsMap">
         <id property="id" column="id" />

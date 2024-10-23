@@ -73,8 +73,8 @@ public class ItemsController {
         });
         return "items/itemQuantityUpdate";
     }
-        @RequestMapping("itemsRequestEdit/{id}")
-        public String itemRequestUpdate ( @PathVariable("id") int id, @ModelAttribute Items items, Model model){
+        @RequestMapping("itemRequestEdit/{id}")
+        public String itemRequestUpdate (@PathVariable("id") int id, @ModelAttribute Items items, Model model){
             items.setId(id);
             itemsService.itemDetailUpdate(items);
             return "items/itemRequestEdit";
