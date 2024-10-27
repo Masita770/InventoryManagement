@@ -34,6 +34,14 @@
 
         <th th:text="*{deletedDate}"></th>
 
+        <th th:text="*{stocksList.itemsId}"></th>
+
+        <th th:text="*{stocksList.ordersList.stocksId}"></th>
+
+        <th th:text="*{stocksList.quantity}"></th>
+
+        <th th:text="*{stocksList.ordersList.deliveryDate}"></th>
+
         <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/itemQuantityUpdate/{id}(id=${id})}">更新</a></td>
 
     </div>

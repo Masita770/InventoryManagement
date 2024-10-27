@@ -2,6 +2,7 @@ package com.example.InventoryManagement.controller;
 
 
 import com.example.InventoryManagement.domain.Items;
+import com.example.InventoryManagement.domain.Orders;
 import com.example.InventoryManagement.domain.Stocks;
 import com.example.InventoryManagement.form.ItemRequestForm;
 import com.example.InventoryManagement.service.ItemsService;
@@ -74,7 +75,7 @@ public class ItemsController {
         return "items/itemQuantityUpdate";
     }
         @RequestMapping("itemRequestEdit/{id}")
-        public String itemRequestUpdate (@PathVariable("id") int id, @ModelAttribute Items items, Model model){
+        public String itemRequestUpdate (@PathVariable("id") int id, @ModelAttribute Items items, Stocks stocks, Orders orders,Model model){
             items.setId(id);
             itemsService.itemDetailUpdate(items);
             return "items/itemRequestEdit";

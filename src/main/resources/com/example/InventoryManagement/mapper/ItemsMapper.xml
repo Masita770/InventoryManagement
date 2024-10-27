@@ -18,10 +18,11 @@
     <insert id="itemAdd" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO items(category, item) VALUES (#{category}, #{item})
     </insert>
+<!--quantityとorderDateに値が入っていないため、データベースから持ってこれるようにする。    -->
     <update id="itemDetailUpdate">
-        UPDATE items INNER JOIN stocks ON items.id = stocks.items_id INNER JOIN stocks.id = orders.stocks_id
-        SET stocks.quantity = (#{stocksList.quantity} + #{ordersList.orderDate})
-        WHERE items.id = #{id}
+        UPDATE items INNER JOIN stocks ON items.id = stocks.items_id INNER JOIN orders ON stocks.id = orders.stocks_id
+        SET stocks.quantity = stocks.quantity + orders.order_date
+        WHERE stocks.id = #{id}
     </update>
 
     <resultMap type="com.example.InventoryManagement.domain.Items" id="itemsMap">
@@ -30,14 +31,15 @@
         <result property="item" column="item" />
         <result property="registrationDate" column="registration_date" />
         <result property="deletedDate" column="deleted_date" />
-        <association property="stocksList" resultMap="stockMap"></association>
-        <collection property="ordersList" resultMap="orderMap"></collection>
+        <collection property="stocksList" resultMap="stockMap"></collection>
+<!--        <collection property="ordersList" resultMap="orderMap"></collection>-->
     </resultMap>
     <resultMap type="com.example.InventoryManagement.domain.Stocks" id="stockMap" >
         <id property="id" column="id" />
         <result property="itemsId" column="items_id" />
         <result property="quantity" column="quantity" />
         <result property="updateDate" column="update_date" />
+        <association property="itemsList" resultMap="itemsMap"></association>
         <association property="ordersList" resultMap="orderMap"></association>
     </resultMap>
     <resultMap type="com.example.InventoryManagement.domain.Orders" id="orderMap">
