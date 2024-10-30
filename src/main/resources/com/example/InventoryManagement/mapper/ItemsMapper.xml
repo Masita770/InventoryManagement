@@ -24,6 +24,10 @@
         SET stocks.quantity = stocks.quantity + orders.order_date
         WHERE items.id = #{id}
     </update>
+    <delete id="deleteOrder">
+        DELETE items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items
+        INNER JOIN stocks ON items.id = stocks.items_id WHERE orders.id = #{id}
+    </delete>
 
     <resultMap type="com.example.InventoryManagement.domain.Items" id="itemsMap">
         <id property="id" column="id" />

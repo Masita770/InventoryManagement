@@ -17,4 +17,6 @@ public interface ItemsMapper {
     void itemAdd(Items items);
 
     void itemDetailUpdate(Items items);
+
+    void deleteOrder(Items delete);
 }
