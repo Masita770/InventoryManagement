@@ -41,4 +41,9 @@ public class ItemServiceImpl implements ItemsService{
     public void itemDetailUpdate(Items items) {
         itemsMapper.itemDetailUpdate(items);
     }
+
+    @Override
+    public void itemOrderDelete(Items items) {
+        itemsMapper.deleteOrder(items);
+    }
 }
