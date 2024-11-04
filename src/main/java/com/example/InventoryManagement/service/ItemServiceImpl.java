@@ -43,7 +43,7 @@ public class ItemServiceImpl implements ItemsService{
     }
 
     @Override
-    public void itemOrderDelete(Items items) {
-        itemsMapper.deleteOrder(items);
+    public void itemOrderDelete(Items delete) {
+        itemsMapper.deleteOrder(delete);
     }
 }

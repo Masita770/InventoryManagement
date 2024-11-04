@@ -82,5 +82,14 @@ public class ItemsController {
             //TODO: 個数入力を更新処理で実現
         }
 
-
+        @GetMapping("d/{id}")
+        public String delete(@PathVariable("id")int id, Model model) {
+            Optional<Items> itemOrderDelete = itemsService.getSelectOne(id);
+            itemOrderDelete.ifPresentOrElse(insideDelete -> {
+                model.addAttribute("orderDelete", insideDelete);
+            } , () ->
+                    System.out.println("u"));
+            model.addAttribute("d", itemOrderDelete);
+            return "items/d";
+        }
 }

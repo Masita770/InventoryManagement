@@ -21,6 +21,7 @@
         <th id="category">分類</th>
         <th id="item">製品</th>
         <th id="registrationDate">登録日</th>
+        <th id="quantity">在庫数</th>
         <th id="deletedDate">廃番日</th>
 
 
@@ -37,6 +38,8 @@
             <th th:text="${items.item}"></th>
 
             <th th:text="${items.registrationDate}"></th>
+
+            <th th:text="${items.stocksList.quantity}"></th>
 
             <th th:text="${items.deletedDate}"></th>
 

@@ -27,6 +27,6 @@ public interface ItemsService {
     void itemDetailUpdate(Items items);
 
     @Transactional
-    void itemOrderDelete(Items items);
+    void itemOrderDelete(Items delete);
 }
 

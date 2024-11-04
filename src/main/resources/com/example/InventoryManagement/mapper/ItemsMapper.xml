@@ -10,6 +10,7 @@
     <select id="itemsSelectOne" resultMap="itemsMap">
         SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity, orders.id, orders.stocks_id, orders.order_date FROM items
         INNER JOIN stocks ON items.id = stocks.items_id INNER JOIN orders ON stocks.id = orders.stocks_id WHERE items.id = #{id}
+        ORDER BY stocks.items_id,orders.stocks_id
     </select>
     <select id="stockSelectOne" resultMap="stockMap">
         SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items
