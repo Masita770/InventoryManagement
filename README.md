@@ -12,6 +12,9 @@ Spring Boot 3.0.5
 MySQL 5.7.33
 
 # ER図
+![スクリーンショット 2024-11-10 183439](https://github.com/user-attachments/assets/1d4c74c2-e6fe-4664-b8fc-0ac2687bdd37)
+
+
 # テーブル定義
 ## productsテーブル
 |列名             |データ型         |備考            | 
