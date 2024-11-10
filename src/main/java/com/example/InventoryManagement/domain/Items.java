@@ -3,6 +3,7 @@ package com.example.InventoryManagement.domain;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,9 +15,9 @@ public class Items {
     private String deletedDate;
 
     Stocks stocksList;
-    Orders ordersList;
+    List<Orders> ordersList;
 
-    public Items(int id,String category, String item, String registrationDate, String deletedDate, Stocks stocksList, Orders ordersList) {
+    public Items(int id,String category, String item, String registrationDate, String deletedDate, Stocks stocksList, List<Orders> ordersList) {
         this.id = id;
         this.category = category;
         this.item = item;
