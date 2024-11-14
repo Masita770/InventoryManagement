@@ -1,6 +1,7 @@
 package com.example.InventoryManagement.mapper;
 
 import com.example.InventoryManagement.domain.Items;
+import com.example.InventoryManagement.domain.Orders;
 import com.example.InventoryManagement.domain.Stocks;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,4 +20,7 @@ public interface ItemsMapper {
     void itemDetailUpdate(Items items);
 
     void deleteOrder(Items delete);
+
+
+    Optional<Orders> orderSelect(int id);
 }

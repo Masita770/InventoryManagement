@@ -2,6 +2,7 @@ package com.example.InventoryManagement.service;
 
 
 import com.example.InventoryManagement.domain.Items;
+import com.example.InventoryManagement.domain.Orders;
 import com.example.InventoryManagement.domain.Stocks;
 import com.example.InventoryManagement.mapper.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,12 @@ public class ItemServiceImpl implements ItemsService{
     @Override
     public void itemOrderDelete(Items delete) {
         itemsMapper.deleteOrder(delete);
+    }
+
+
+
+    @Override
+    public Optional<Orders> orderSelect(int id) {
+        return itemsMapper.orderSelect(id);
     }
 }

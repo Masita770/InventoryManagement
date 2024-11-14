@@ -82,7 +82,7 @@ public class ItemsController {
             //TODO: 個数入力を更新処理で実現
         }
 
-        @GetMapping("d/{id}")
+        @GetMapping("r/{id}")
         public String delete(@PathVariable("id")int id, Model model) {
             Optional<Items> itemOrderDelete = itemsService.getSelectOne(id);
             itemOrderDelete.ifPresentOrElse(insideDelete -> {
@@ -90,6 +90,16 @@ public class ItemsController {
             } , () ->
                     System.out.println("u"));
             model.addAttribute("d", itemOrderDelete);
-            return "items/d";
+            return "items/r";
+        }
+
+
+
+        @GetMapping("r/itemsId")
+        public String order(@PathVariable("itemsId")int id, Model model) {
+            Optional<Orders> select = itemsService.orderSelect(id);
+            select.ifPresentOrElse(inside -> model.addAttribute("d", inside) , () ->
+            model.addAttribute("i", select));
+            return "items/r";
         }
 }

@@ -2,9 +2,11 @@ package com.example.InventoryManagement.service;
 
 
 import com.example.InventoryManagement.domain.Items;
+import com.example.InventoryManagement.domain.Orders;
 import com.example.InventoryManagement.domain.Stocks;
 import com.example.InventoryManagement.mapper.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,5 +30,9 @@ public interface ItemsService {
 
     @Transactional
     void itemOrderDelete(Items delete);
+
+
+    @Transactional
+    Optional<Orders> orderSelect(int id);
 }
 

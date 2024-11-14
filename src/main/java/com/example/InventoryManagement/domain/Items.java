@@ -15,9 +15,9 @@ public class Items {
     private String deletedDate;
 
     Stocks stocksList;
-    List<Orders> ordersList;
+    Orders ordersList;
 
-    public Items(int id,String category, String item, String registrationDate, String deletedDate, Stocks stocksList, List<Orders> ordersList) {
+    public Items(int id,String category, String item, String registrationDate, String deletedDate, Stocks stocksList, Orders ordersList) {
         this.id = id;
         this.category = category;
         this.item = item;
