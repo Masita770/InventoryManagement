@@ -6,6 +6,7 @@ import com.example.InventoryManagement.domain.Orders;
 import com.example.InventoryManagement.domain.Stocks;
 import com.example.InventoryManagement.form.ItemRequestForm;
 import com.example.InventoryManagement.service.ItemsService;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -82,24 +83,25 @@ public class ItemsController {
             //TODO: 個数入力を更新処理で実現
         }
 
+//        @GetMapping("r/{id}")
+//        public String delete(@PathVariable("id")int id, Orders ordersList, Model model) {
+//            Optional<Items> itemOrderDelete = itemsService.getSelectOne(id, ordersList);
+//            itemOrderDelete.ifPresentOrElse(insideDelete -> {
+//                model.addAttribute("orderDelete", insideDelete);
+//            } , () ->
+//                    System.out.println("u"));
+//            model.addAttribute("d", itemOrderDelete);
+//            return "items/r";
+//        }
+
+
+
         @GetMapping("r/{id}")
-        public String delete(@PathVariable("id")int id, Model model) {
-            Optional<Items> itemOrderDelete = itemsService.getSelectOne(id);
-            itemOrderDelete.ifPresentOrElse(insideDelete -> {
-                model.addAttribute("orderDelete", insideDelete);
-            } , () ->
-                    System.out.println("u"));
-            model.addAttribute("d", itemOrderDelete);
-            return "items/r";
-        }
-
-
-
-        @GetMapping("r/itemsId")
-        public String order(@PathVariable("itemsId")int id, Model model) {
-            Optional<Orders> select = itemsService.orderSelect(id);
-            select.ifPresentOrElse(inside -> model.addAttribute("d", inside) , () ->
-            model.addAttribute("i", select));
+        public String inventory(@PathVariable("id")int id, Items items, Model model) {
+            List<Items> select = itemsService.orderSelect(items);
+            model.addAttribute("r", select);
+//            select.ifPresentOrElse(inside -> model.addAttribute("r", inside) , () ->
+//            model.addAttribute("i", select));
             return "items/r";
         }
 }
