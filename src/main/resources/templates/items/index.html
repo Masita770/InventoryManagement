@@ -29,7 +29,7 @@
     </thead>
     <tbody>
     <div class="list">
-        <tr class="items" th:each="items : ${items}" >
+        <tr class="items" th:each="items : *{items}" >
 
             <th th:text="${items.id}"></th>
 

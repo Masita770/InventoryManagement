@@ -96,12 +96,13 @@ public class ItemsController {
 
 
 
-        @GetMapping("r/{id}")
-        public String inventory(@PathVariable("id")int id, Items items, Model model) {
-            List<Items> select = itemsService.orderSelect(items);
-            model.addAttribute("r", select);
+        @GetMapping("r")
+        public String inventory(Model model) {
+            List<Items> select = itemsService.orderSelect();
+//            items.setStocksList(stocks.getItemsList().getStocksList());
+//            model.addAttribute("r", items);
 //            select.ifPresentOrElse(inside -> model.addAttribute("r", inside) , () ->
-//            model.addAttribute("i", select));
+            model.addAttribute("r", select);
             return "items/r";
         }
 }

@@ -33,6 +33,6 @@ public interface ItemsService {
 
 
     @Transactional
-    List<Items> orderSelect(Items items);
+    List<Items> orderSelect();
 }
 

@@ -51,7 +51,7 @@ public class ItemServiceImpl implements ItemsService{
 
 
     @Override
-    public List<Items> orderSelect(Items items) {
-        return itemsMapper.orderSelect(items);
+    public List<Items> orderSelect() {
+        return itemsMapper.orderSelect();
     }
 }

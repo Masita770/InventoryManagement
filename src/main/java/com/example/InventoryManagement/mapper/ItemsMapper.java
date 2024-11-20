@@ -22,5 +22,5 @@ public interface ItemsMapper {
     void deleteOrder(Items delete);
 
 
-    List<Items> orderSelect(Items items);
+    List<Items> orderSelect();
 }
