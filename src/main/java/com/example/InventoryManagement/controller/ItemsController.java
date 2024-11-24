@@ -29,7 +29,7 @@ public class ItemsController {
         this.itemsService = itemsService;
     }
 
-    @GetMapping("index")
+    @RequestMapping("index")
     public String itemsAll(Model model) {
         List<Items> getAll = itemsService.getSelectAll();
         model.addAttribute("items", getAll);

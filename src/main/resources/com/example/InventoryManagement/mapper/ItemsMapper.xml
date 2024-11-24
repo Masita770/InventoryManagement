@@ -4,10 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.InventoryManagement.mapper.ItemsMapper">
 
-    <select id="itemsSelectAll" resultMap="itemsMap" resultType="com.example.InventoryManagement.domain.Items">
+    <select id="itemsSelectAll" resultMap="itemsMap">
         SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items  INNER JOIN stocks ON items.id = stocks.items_id
+<!--            SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.quantity, orders.id, orders.items_id, orders.stocks_id, orders.order_date-->
+<!--            FROM items INNER JOIN stocks ON items.id = stocks.items_id-->
+<!--            INNER JOIN orders ON stocks.id = orders.stocks_id-->
     </select>
-    <select id="itemsSelectOne" resultMap="itemsMap">
+    <select id="itemsSelectOne" resultType="com.example.InventoryManagement.domain.Items" resultMap="itemsMap">
         SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date,
         stocks.id, stocks.items_id, stocks.quantity,
         orders.id, orders.stocks_id, orders.order_date FROM items
@@ -16,10 +19,10 @@
 <!--        OUTER JOIN orders ON items.id = orders.items_id WHERE items.id = #{id}-->
 <!--        ORDER BY stocks.items_id,orders.stocks_id-->
     </select>
-    <select id="stockSelectOne" resultMap="stockMap">
-        SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items
-        INNER JOIN stocks ON items.id = stocks.items_id WHERE items.id = #{id}
-    </select>
+<!--    <select id="stockSelectOne" resultMap="stockMap">-->
+<!--        SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items-->
+<!--        INNER JOIN stocks ON items.id = stocks.items_id WHERE items.id = #{id}-->
+<!--    </select>-->
     <insert id="itemAdd" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO items(category, item) VALUES (#{category}, #{item})
     </insert>
@@ -48,22 +51,45 @@
         <result property="item" column="item" />
         <result property="registrationDate" column="registration_date" />
         <result property="deletedDate" column="deleted_date" />
-        <collection property="stocksList" resultMap="stockMap"></collection>
+        <collection property="stocksList" ofType="com.example.InventoryManagement.domain.Stocks">
+            <id property="id" column="id" />
+            <result property="itemsId" column="items_id" />
+            <result property="quantity" column="quantity" />
+            <result property="updateDate" column="update_date" />
+            <!--        <association property="itemsList" resultMap="itemsMap"></association>-->
+            <!--        <collection property="ordersList" resultMap="orderMap"></collection>-->
+            <collection property="ordersList" ofType="com.example.InventoryManagement.domain.Orders">
+                <id property="id" column="id" />
+                <result property="itemsId" column="items_id" />
+                <result property="stocksId" column="stocks_id" />
+                <result property="orderDate" column="order_date" />
+                <result property="deliveryDate" column="delivery_date" />
+            </collection>
+        </collection>
+<!--        <collection property="stocksList" ofType="com.example.InventoryManagement.domain.Stocks" autoMapping="true"></collection>-->
+<!--        <collection property="ordersList" ofType="com.example.InventoryManagement.domain.Orders" autoMapping="true"></collection>-->
 <!--        <collection property="ordersList" resultMap="orderMap"></collection>-->
     </resultMap>
-    <resultMap type="com.example.InventoryManagement.domain.Stocks" id="stockMap" >
-        <id property="id" column="id" />
-        <result property="itemsId" column="items_id" />
-        <result property="quantity" column="quantity" />
-        <result property="updateDate" column="update_date" />
-        <association property="itemsList" resultMap="itemsMap"></association>
-        <association property="ordersList" resultMap="orderMap"></association>
-    </resultMap>
-    <resultMap type="com.example.InventoryManagement.domain.Orders" id="orderMap">
-        <id property="id" column="id" />
-        <result property="itemsId" column="items_id" />
-        <result property="stocksId" column="stocks_id" />
-        <result property="orderDate" column="order_date" />
-        <result property="deliveryDate" column="delivery_date" />
-    </resultMap>
+<!--    <resultMap type="com.example.InventoryManagement.domain.Stocks" id="stockMap" >-->
+<!--        <id property="id" column="id" />-->
+<!--        <result property="itemsId" column="items_id" />-->
+<!--        <result property="quantity" column="quantity" />-->
+<!--        <result property="updateDate" column="update_date" />-->
+<!--&lt;!&ndash;        <association property="itemsList" resultMap="itemsMap"></association>&ndash;&gt;-->
+<!--&lt;!&ndash;        <collection property="ordersList" resultMap="orderMap"></collection>&ndash;&gt;-->
+<!--        <collection property="ordersList" ofType="com.example.InventoryManagement.domain.Orders">-->
+<!--            <id property="id" column="id" />-->
+<!--            <result property="itemsId" column="items_id" />-->
+<!--            <result property="stocksId" column="stocks_id" />-->
+<!--            <result property="orderDate" column="order_date" />-->
+<!--            <result property="deliveryDate" column="delivery_date" />-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+<!--    <resultMap type="com.example.InventoryManagement.domain.Orders" id="orderMap">-->
+<!--        <id property="id" column="id" />-->
+<!--        <result property="itemsId" column="items_id" />-->
+<!--        <result property="stocksId" column="stocks_id" />-->
+<!--        <result property="orderDate" column="order_date" />-->
+<!--        <result property="deliveryDate" column="delivery_date" />-->
+<!--    </resultMap>-->
 </mapper>

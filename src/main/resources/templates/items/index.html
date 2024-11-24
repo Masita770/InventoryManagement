@@ -29,7 +29,8 @@
     </thead>
     <tbody>
     <div class="list">
-        <tr class="items" th:each="items : *{items}" >
+        <tr class="items" th:each="items : ${items}" th:object="${items}">
+            <td th:each="itemDate : ${items.stocksList}">
 
             <th th:text="${items.id}"></th>
 
@@ -39,16 +40,18 @@
 
             <th th:text="${items.registrationDate}"></th>
 
-            <th th:text="${items.stocksList.quantity}"></th>
+            <th th:text="${item.itemDate.quantity}"></th>
 
             <th th:text="${items.deletedDate}"></th>
+
+            <th th:text="${items.itemDate.stocksList.ordersList.orderDate}"></th>
 
             <!--        <th th:text="${product.inventory}"></th>-->
 
             <td><a class="btn btn-outline-primary btn-sm" th:href="@{itemDetail/{id}(id=${items.id})}">参照</a></td>
 
 
-        </tr>
+            </td>
         </tr>
     </div>
 
