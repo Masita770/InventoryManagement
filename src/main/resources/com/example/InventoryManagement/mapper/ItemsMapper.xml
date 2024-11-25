@@ -51,8 +51,6 @@
             <result property="itemsId" column="items_id" />
             <result property="quantity" column="quantity" />
             <result property="updateDate" column="update_date" />
-            <!--        <association property="itemsList" resultMap="itemsMap"></association>-->
-            <!--        <collection property="ordersList" resultMap="orderMap"></collection>-->
             <collection property="ordersList" ofType="com.example.InventoryManagement.domain.Orders">
                 <id property="id" column="id" />
                 <result property="itemsId" column="items_id" />
@@ -61,30 +59,5 @@
                 <result property="deliveryDate" column="delivery_date" />
             </collection>
         </collection>
-<!--        <collection property="stocksList" ofType="com.example.InventoryManagement.domain.Stocks" autoMapping="true"></collection>-->
-<!--        <collection property="ordersList" ofType="com.example.InventoryManagement.domain.Orders" autoMapping="true"></collection>-->
-<!--        <collection property="ordersList" resultMap="orderMap"></collection>-->
     </resultMap>
-<!--    <resultMap type="com.example.InventoryManagement.domain.Stocks" id="stockMap" >-->
-<!--        <id property="id" column="id" />-->
-<!--        <result property="itemsId" column="items_id" />-->
-<!--        <result property="quantity" column="quantity" />-->
-<!--        <result property="updateDate" column="update_date" />-->
-<!--&lt;!&ndash;        <association property="itemsList" resultMap="itemsMap"></association>&ndash;&gt;-->
-<!--&lt;!&ndash;        <collection property="ordersList" resultMap="orderMap"></collection>&ndash;&gt;-->
-<!--        <collection property="ordersList" ofType="com.example.InventoryManagement.domain.Orders">-->
-<!--            <id property="id" column="id" />-->
-<!--            <result property="itemsId" column="items_id" />-->
-<!--            <result property="stocksId" column="stocks_id" />-->
-<!--            <result property="orderDate" column="order_date" />-->
-<!--            <result property="deliveryDate" column="delivery_date" />-->
-<!--        </collection>-->
-<!--    </resultMap>-->
-<!--    <resultMap type="com.example.InventoryManagement.domain.Orders" id="orderMap">-->
-<!--        <id property="id" column="id" />-->
-<!--        <result property="itemsId" column="items_id" />-->
-<!--        <result property="stocksId" column="stocks_id" />-->
-<!--        <result property="orderDate" column="order_date" />-->
-<!--        <result property="deliveryDate" column="delivery_date" />-->
-<!--    </resultMap>-->
 </mapper>
