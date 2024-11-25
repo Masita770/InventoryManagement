@@ -14,7 +14,7 @@ public class Items {
     private String registrationDate;
     private String deletedDate;
 
-    List<Stocks> stocksList;
+    private List<Stocks> stocksList;
 //    Orders ordersList;
 
     public Items(int id,String category, String item, String registrationDate, String deletedDate, List<Stocks> stocksList, Orders ordersList) {

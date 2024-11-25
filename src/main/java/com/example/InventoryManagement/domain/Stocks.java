@@ -14,8 +14,8 @@ public class Stocks {
     private int itemsId;
     private int quantity;
     private String updateDate;
-    Items itemsList;
-    List<Orders> ordersList;
+    private Items itemsList;
+    private List<Orders> ordersList;
 
     public Stocks(int id, int itemsId, int quantity, String updateDate, Items itemsList, List<Orders> ordersList) {
         this.id = id;

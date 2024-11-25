@@ -5,24 +5,19 @@
 <mapper namespace="com.example.InventoryManagement.mapper.ItemsMapper">
 
     <select id="itemsSelectAll" resultMap="itemsMap">
-        SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items  INNER JOIN stocks ON items.id = stocks.items_id
-<!--            SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.quantity, orders.id, orders.items_id, orders.stocks_id, orders.order_date-->
-<!--            FROM items INNER JOIN stocks ON items.id = stocks.items_id-->
-<!--            INNER JOIN orders ON stocks.id = orders.stocks_id-->
+        SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items
+        INNER JOIN stocks ON items.id = stocks.items_id
     </select>
     <select id="itemsSelectOne" resultType="com.example.InventoryManagement.domain.Items" resultMap="itemsMap">
         SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date,
         stocks.id, stocks.items_id, stocks.quantity,
         orders.id, orders.stocks_id, orders.order_date FROM items
-        LEFT JOIN stocks ON items.id = stocks.items_id LEFT JOIN orders ON stocks.id = orders.stocks_id WHERE items.id = #{id}
-<!--        INNER JOIN stocks ON items.id = stocks.items_id -->
-<!--        OUTER JOIN orders ON items.id = orders.items_id WHERE items.id = #{id}-->
-<!--        ORDER BY stocks.items_id,orders.stocks_id-->
+        LEFT JOIN stocks ON items.id = stocks.items_id
+        LEFT JOIN orders ON stocks.id = orders.stocks_id
+        WHERE items.id = #{id}
+
     </select>
-<!--    <select id="stockSelectOne" resultMap="stockMap">-->
-<!--        SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items-->
-<!--        INNER JOIN stocks ON items.id = stocks.items_id WHERE items.id = #{id}-->
-<!--    </select>-->
+
     <insert id="itemAdd" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO items(category, item) VALUES (#{category}, #{item})
     </insert>
