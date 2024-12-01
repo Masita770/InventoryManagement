@@ -36,6 +36,14 @@ public class ItemsController {
         return "items/index";
     }
 
+    @GetMapping("itemOrderList/{id}")
+    public String itemOrder(@PathVariable("id")int id, Model model) {
+        List<Items> itemOrderList = itemsService.getItemOrderAll(id);
+        model.addAttribute("itemOrder", itemOrderList);
+        return "items/itemOrderList";
+    }
+
+
     @GetMapping("itemDetail/{id}")
     public String itemsOne(@PathVariable("id")int id, Model model) throws NotFoundException {
         Optional<Items> itemsOne = itemsService.getSelectOne(id);

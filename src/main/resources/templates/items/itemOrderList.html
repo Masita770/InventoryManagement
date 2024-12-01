@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-    <html xmlns:th="http://www.thymeleaf.org">
-    <head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
 
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,27 +22,23 @@
     </tr>
     </thead>
     <tbody>
-    <div th:object="${item}">
+    <div th:each="order : ${itemOrder}">
 
-        <th th:text="*{id}"></th>
+        <th th:text="${order.id}"></th>
 
-        <th th:text="*{category}"></th>
+        <th th:text="${order.category}"></th>
 
-        <th th:text="*{item}"></th>
+        <th th:text="${order.item}"></th>
 
-        <th th:text="*{registrationDate}"></th>
+        <th th:text="${order.registrationDate}"></th>
 
-        <th th:text="*{deletedDate}"></th>
+        <th th:text="${order.deletedDate}"></th>
 
-<!--        <th th:text="*{stocksList.itemsId}"></th>-->
+        <th th:text="${order.stocksList.quantity}"></th>
 
-<!--        <th th:text="*{ordersList.stocksList.stocksId}"></th>-->
-
-        <th th:text="*{stocksList.quantity}"></th>
-
-<!--        <th th:text="*{stocksList.ordersList.orderDate}"></th>-->
+        <th th:text="${order.stocksList.ordersList.orderDate}"></th>
     </div>
-        <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/itemQuantityUpdate/{id}(id=${id})}">更新</a></td>
+    <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/itemQuantityUpdate/{id}(id=${id})}">更新</a></td>
     <div th:each="order : *{ordersList}">
         <th th:text="${order.stocksList.ordersList.orderDate}">注文情報</th>
         <td th:case= 4 th:text="オフィス用具"></td>

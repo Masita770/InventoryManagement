@@ -29,26 +29,28 @@
     </thead>
     <tbody>
     <div class="list">
-        <tr class="items" th:each="items : ${items}" th:object="${items}">
-            <td th:each="itemDate : ${items.stocksList}">
+        <tr class="items" th:each="item : ${items}">
+<!--            <tr th:each="itemDate : ${item.stocksList.ordersList}">-->
 
-            <th th:text="${items.id}"></th>
+            <th th:text="${item.id}"></th>
 
-            <th th:text="${items.category}"></th>
+            <th th:text="${item.category}"></th>
 
-            <th th:text="${items.item}"></th>
+            <th th:text="${item.item}"></th>
 
-            <th th:text="${items.registrationDate}"></th>
+            <th th:text="${item.registrationDate}"></th>
 
-            <th th:text="${itemDate.quantity}"></th>
+            <th th:text="${item.stocksList.quantity}"></th>
 
-            <th th:text="${items.deletedDate}"></th>
+<!--            <th th:text="${items.deletedDate}"></th>-->
+
+<!--            <th th:text="${itemDate.orderDate}"></th>-->
 
 
-            <td><a class="btn btn-outline-primary btn-sm" th:href="@{itemDetail/{id}(id=${items.id})}">参照</a></td>
+            <td><a class="btn btn-outline-primary btn-sm" th:href="@{itemOrderList/{id}(id=${item.id})}">参照</a></td>
 
 
-            </td>
+            </tr>
         </tr>
     </div>
 

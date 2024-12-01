@@ -18,6 +18,8 @@ public interface ItemsService {
 
     List<Items> getSelectAll();
 
+    List<Items> getItemOrderAll(int id);
+
     @Transactional
     Optional<Items> getSelectOne(int id);
 

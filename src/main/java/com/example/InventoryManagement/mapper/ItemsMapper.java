@@ -13,6 +13,8 @@ public interface ItemsMapper {
 
     List<Items> itemsSelectAll();
 
+    List<Items> itemOrderAll(int id);
+
     Optional<Items> itemsSelectOne(int id);
 
     void itemAdd(Items items);

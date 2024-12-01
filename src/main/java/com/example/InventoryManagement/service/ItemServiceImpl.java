@@ -25,6 +25,11 @@ public class ItemServiceImpl implements ItemsService{
     }
 
     @Override
+    public List<Items> getItemOrderAll(int id) {
+        return itemsMapper.itemOrderAll(id);
+    }
+
+    @Override
     public Optional<Items> getSelectOne(int id) {
         return itemsMapper.itemsSelectOne(id);
     }

@@ -5,7 +5,8 @@ import lombok.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 public class Items {
     private int id;
@@ -14,10 +15,10 @@ public class Items {
     private String registrationDate;
     private String deletedDate;
 
-    private List<Stocks> stocksList;
+    private Stocks stocksList;
 //    Orders ordersList;
 
-    public Items(int id,String category, String item, String registrationDate, String deletedDate, List<Stocks> stocksList, Orders ordersList) {
+    public Items(int id,String category, String item, String registrationDate, String deletedDate, Stocks stocksList, Orders ordersList) {
         this.id = id;
         this.category = category;
         this.item = item;
