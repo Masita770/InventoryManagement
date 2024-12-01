@@ -19,10 +19,13 @@
         <th id="id">ID</th>
         <th id="product">製品</th>
         <th id="quantity">数量</th>
+        <th id="inventory">在庫</th>
+        <th id="orderDate">注文</th>
     </tr>
     </thead>
     <tbody>
     <div th:each="order : ${itemOrder}">
+        <tr th:each="o : ${order.stocksList.ordersList}">
 
         <th th:text="${order.id}"></th>
 
@@ -30,13 +33,11 @@
 
         <th th:text="${order.item}"></th>
 
-        <th th:text="${order.registrationDate}"></th>
-
-        <th th:text="${order.deletedDate}"></th>
-
         <th th:text="${order.stocksList.quantity}"></th>
 
-        <th th:text="${order.stocksList.ordersList.orderDate}"></th>
+        <th th:text="${o.orderDate}"></th>
+
+        </tr>
     </div>
     <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/itemQuantityUpdate/{id}(id=${id})}">更新</a></td>
     <div th:each="order : *{ordersList}">
