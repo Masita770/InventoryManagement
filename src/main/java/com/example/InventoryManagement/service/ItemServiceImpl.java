@@ -2,8 +2,6 @@ package com.example.InventoryManagement.service;
 
 
 import com.example.InventoryManagement.domain.Items;
-import com.example.InventoryManagement.domain.Orders;
-import com.example.InventoryManagement.domain.Stocks;
 import com.example.InventoryManagement.mapper.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +23,7 @@ public class ItemServiceImpl implements ItemsService{
     }
 
     @Override
-    public List<Items> getItemOrderAll(int id) {
+    public Optional<Items> getItemOrderAll(int id) {
         return itemsMapper.itemOrderAll(id);
     }
 
