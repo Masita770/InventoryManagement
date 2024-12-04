@@ -38,8 +38,10 @@ public class ItemsController {
 
     @GetMapping("itemOrderList/{id}")
     public String itemOrder(@PathVariable("id")int id, Model model) {
-        List<Items> itemOrderList = itemsService.getItemOrderAll(id);
-        model.addAttribute("itemOrder", itemOrderList);
+        Optional<Items> itemOrderList = itemsService.getItemOrderAll(id);
+        itemOrderList.ifPresentOrElse(inside -> model.addAttribute("itemOrder", inside), () ->
+                model.addAttribute("not", itemOrderList));
+//        model.addAttribute("itemOrder", itemOrderList);
         return "items/itemOrderList";
     }
 
