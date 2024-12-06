@@ -1,8 +1,6 @@
 package com.example.InventoryManagement.mapper;
 
 import com.example.InventoryManagement.domain.Items;
-import com.example.InventoryManagement.domain.Orders;
-import com.example.InventoryManagement.domain.Stocks;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,7 +11,7 @@ public interface ItemsMapper {
 
     List<Items> itemsSelectAll();
 
-    List<Items> itemOrderAll(int id);
+    Optional<Items> itemOrderAll(int id);
 
     Optional<Items> itemsSelectOne(int id);
 
