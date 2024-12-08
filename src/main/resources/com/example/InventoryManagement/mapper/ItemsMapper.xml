@@ -31,8 +31,11 @@
 <!--quantityとorderDateに値が入っていないため、データベースから持ってこれるようにする。    -->
     <update id="itemDetailUpdate">
         UPDATE items INNER JOIN stocks ON items.id = stocks.items_id INNER JOIN orders ON stocks.id = orders.stocks_id
-        SET stocks.quantity = stocks.quantity + orders.order_date
+        SET stocks.quantity = stocks.quantity + orders.order_date = #{orderDate}
         WHERE items.id = #{id}
+        <selectKey keyProperty="id" order="AFTER">
+            INSERT INTO orders(id, stocks_id, order_date) VALUES (#{id}, #{stocksId}, #{orderDate})
+        </selectKey>
     </update>
     <delete id="deleteOrder">
         DELETE items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items
