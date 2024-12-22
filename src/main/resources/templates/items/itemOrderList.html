@@ -24,21 +24,21 @@
     </tr>
     </thead>
     <tbody>
-<!--    <div th:object=""-->
+    <!--    <div th:object=""-->
     <div th:each="order : ${itemOrder}">
-        <tr th:each="o : ${order.stocksList.ordersList}">
+<!--        <tr th:each="o : ${order.stocksList.ordersList}">-->
 
-        <th th:text="*{order.id}"></th>
+            <th th:text="*{order.id}"></th>
 
-        <th th:text="*{order.category}"></th>
+            <th th:text="*{order.category}"></th>
 
-        <th th:text="${order.item}"></th>
+            <th th:text="${order.item}"></th>
 
-<!--        <th th:text="${order.stocksList.quantity}"></th>-->
+                    <th th:text="${order.stocksList.quantity}"></th>
 
-<!--            <th th:text="${order.stocksList.ordersList.orderDate}"></th>-->
+<!--                        <th th:text="${order.stocksList.ordersList.orderDate}"></th>-->
 
-        <th th:text="${o.orderDate}"></th>
+<!--            <th th:text="${o.orderDate}"></th>-->
 
         </tr>
     </div>
