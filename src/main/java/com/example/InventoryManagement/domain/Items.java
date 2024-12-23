@@ -18,7 +18,7 @@ public class Items {
     private Stocks stocksList;
 //    Orders ordersList;
 
-    public Items(int id,String category, String item, String registrationDate, String deletedDate, Stocks stocksList, Orders ordersList) {
+    public Items(int id,String category, String item, String registrationDate, String deletedDate, Stocks stocksList) {
         this.id = id;
         this.category = category;
         this.item = item;
