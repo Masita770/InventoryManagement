@@ -2,8 +2,8 @@ package com.example.InventoryManagement.controller;
 
 
 import com.example.InventoryManagement.domain.Items;
-import com.example.InventoryManagement.domain.Orders;
-import com.example.InventoryManagement.domain.Stocks;
+//import com.example.InventoryManagement.domain.Orders;
+//import com.example.InventoryManagement.domain.Stocks;
 import com.example.InventoryManagement.form.ItemRequestForm;
 import com.example.InventoryManagement.service.ItemsService;
 import org.apache.ibatis.annotations.Param;
@@ -55,16 +55,16 @@ public class ItemsController {
         return "items/itemDetail";
     }
 
-    @GetMapping("form")
-    public String newItem(Model model, Items items) {
-        ItemRequestForm itemRequestForm = new ItemRequestForm();
-       items.setCategory(itemRequestForm.getCategory());
-       items.setItem(itemRequestForm.getItem());
-        model.addAttribute("select", items);
-        return "items/form";
-    }
+//    @GetMapping("form")
+//    public String newItem(Model model, Items items) {
+//        ItemRequestForm itemRequestForm = new ItemRequestForm();
+//       items.setCategory(itemRequestForm.getCategory());
+//       items.setItem(itemRequestForm.getItem());
+//        model.addAttribute("select", items);
+//        return "items/form";
+//    }
     //TODO: 品番登録後、個数入力できるようにする
-    @PostMapping("itemRequestEdit")
+    @GetMapping("itemRequestEdit")
     public String formItemAdd(@ModelAttribute Items items, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
             List<Items> itemsList = itemsService.getSelectAll();
@@ -85,26 +85,50 @@ public class ItemsController {
         });
         return "items/itemQuantityUpdate";
     }
-        @RequestMapping("itemRequestEdit/{id}")
-        public String itemRequestUpdate (@PathVariable("id") int id, @ModelAttribute Items items, Stocks stocks, Orders orders,Model model){
-            items.setId(id);
-            itemsService.itemDetailUpdate(items);
-            return "items/itemRequestEdit";
-            //TODO: 個数入力を更新処理で実現
-        }
 
-//        @GetMapping("r/{id}")
-//        public String delete(@PathVariable("id")int id, Orders ordersList, Model model) {
-//            Optional<Items> itemOrderDelete = itemsService.getSelectOne(id, ordersList);
-//            itemOrderDelete.ifPresentOrElse(insideDelete -> {
-//                model.addAttribute("orderDelete", insideDelete);
-//            } , () ->
-//                    System.out.println("u"));
-//            model.addAttribute("d", itemOrderDelete);
-//            return "items/r";
+    //TODO: 12/18　注文追加処理を実装を目指す
+    @GetMapping("itemOrderEdit")
+    public String orderComplete() {
+        return "items/itemOrderEdit";
+    }
+
+
+//    @GetMapping("itemOrderRequest/{id}")
+//    String newOrder(@PathVariable("id")int id, @RequestBody(required = false) Model model) {
+//        Optional<Orders> i = itemsService.orderSelectOne(id);
+//        i.ifPresentOrElse(inside -> {
+//            model.addAttribute("item", inside);
+//        }, () -> {
+//            System.out.println("i");
+//        });
+//        return "items/itemOrderRequest";
+//    }
+
+//    @PostMapping("itemOrderRequest/{id}")
+//    String newOrder(@ModelAttribute Orders orders, BindingResult bindingResult, @RequestBody(required = false) Model model) {
+//        if(bindingResult.hasErrors()) {
+//           List<Orders> i = itemsService.orderAll();
+//           model.addAttribute("orderRequest", i);
 //        }
+//        itemsService.itemRequestOrder(orders);
+//        return "items/index";
+//    }
 
-
+//    @GetMapping("itemOrderList/{id}")
+//    public String orderAdd(@PathVariable("id")int id, @ModelAttribute Orders orders, BindingResult bindingResult, Model model) {
+//        if(bindingResult.hasErrors()) {
+//            Optional<Items> itemsList = itemsService.getSelectOne(id);
+//            itemsList.ifPresentOrElse(inside -> {
+//                model.addAttribute("order", inside);
+//            }, () -> {
+//                System.out.println("");
+//                    }
+//            );
+//            model.addAttribute("item", itemsList);
+//            return "items/itemOrderList";
+//        }
+//        return "redirect:index";
+//    }
 
         @GetMapping("r")
         public String inventory(Model model) {
