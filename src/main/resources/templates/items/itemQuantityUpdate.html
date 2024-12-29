@@ -22,37 +22,45 @@
 
     </tr>
     </thead>
-<!--<div class="container">-->
-<!--    <h1>update form</h1>-->
-<!--    <div th:object="${itemUpdate}">-->
-<!--        <div class="form-row mb-4">-->
-<!--            <label class="control-label">ID</label>-->
-<!--            <p class="form-control" th:text="*{id}"></p>-->
-<!--        </div>-->
-<!--        <div class="form-row mb-4">-->
-<!--            <label class="control-label">種類</label>-->
-<!--            <p class="form-control" th:text="*{category}"></p>-->
-<!--        </div>-->
-<!--        <div class="form-row mb-4">-->
-<!--            <label class="control-label">製品名</label>-->
-<!--            <p class="form-control" th:text="*{item}"></p>-->
-<!--        </div>-->
-<!--        <div class="form-row mb-4">-->
-<!--            <label class="control-label">登録日</label>-->
-<!--            <p class="form-control" th:text="*{registrationDate}"></p>-->
-<!--        </div>-->
+<div class="container">
+    <h1>update form</h1>
+    <div th:object="${itemUpdate}">
+        <div class="form-row mb-4">
+            <label class="control-label">ID</label>
+            <p class="form-control" th:text="*{id}"></p>
+        </div>
+        <div class="form-row mb-4">
+            <label class="control-label">種類</label>
+            <p class="form-control" th:text="*{category}"></p>
+        </div>
+        <div class="form-row mb-4">
+            <label class="control-label">製品名</label>
+            <p class="form-control" th:text="*{item}"></p>
+        </div>
+        <div class="form-row mb-4">
+            <label class="control-label">登録日</label>
+            <p class="form-control" th:text="*{registrationDate}"></p>
+        </div>
 <!--        <div id="righttext">-->
 <!--            <a class="btn btn-link" id="linktext" href="/product/list">一覧画面</a>-->
 <!--        </div>-->
 <!--    </div>-->
     <div class="list">
     <form th:action="@{/items/itemRequestEdit/{id}(id=*{id})}" th:method="put" th:each="itemUpdate : ${itemUpdate}">
-        <th th:text="*{itemUpdate.item}" />
-        <th th:text="*{itemUpdate.stocksList.itemsId}" />
-        <th th:text="*{itemUpdate.stocksList.quantity}" />
+<!--        <tr th:each="request : ${itemUpdate.stocksList.ordersList}">-->
+<!--        <th th:text="*{itemUpdate.item}" />-->
+<!--        <th th:text="*{itemUpdate.stocksList.itemsId}" />-->
+<!--        <th th:text="*{itemUpdate.stocksList.quantity}" />-->
 <!--        <th th:text="*{itemUpdate.stocksList.ordersList.stocksId}" />-->
-        <th th:text="*{itemUpdate.stocksList.ordersList.orderDate}" />
-        <td><a class="btn btn-primary" th:href="@{/items/itemRequestEdit/{id}(id=${id})}" />更新</td>
+<!--        <th th:text="*{request.orderDate}" />-->
+            <label class="control-label">数量</label>
+<!--            12/10 int型のはずがstring担っていることがエラーの原因かも-->
+<!--            <input class="form-control" type="text" name="#numbers.parseInteger(orderDate)" />-->
+            <form th:action="@{itemOrderRequest/}" th:object="${item}">
+                <input class="form-control" type="text" name="orderDate" />
+            </form>
+        </tr>
+        <td><a class="btn btn-primary" th:href="@{/items/itemOrderEdit}" />更新</td>
     </form>
     </div>
 </div>
