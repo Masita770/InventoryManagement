@@ -40,7 +40,9 @@
 
             <th th:text="${item.registrationDate}"></th>
 
-            <th th:text="${item.stocksList.quantity}"></th>
+            <li th:each="stock : ${item.stocksList}">
+                <th th:text="${stock.quantity}"></th>
+            </li>
 
 <!--            <th th:text="${items.deletedDate}"></th>-->
 
