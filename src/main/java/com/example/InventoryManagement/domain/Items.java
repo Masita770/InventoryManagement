@@ -15,10 +15,10 @@ public class Items {
     private String registrationDate;
     private String deletedDate;
 
-    private Stocks stocksList;
+    private List<Stocks> stocksList;
 //    Orders ordersList;
 
-    public Items(int id,String category, String item, String registrationDate, String deletedDate, Stocks stocksList) {
+    public Items(int id,String category, String item, String registrationDate, String deletedDate, List<Stocks> stocksList) {
         this.id = id;
         this.category = category;
         this.item = item;

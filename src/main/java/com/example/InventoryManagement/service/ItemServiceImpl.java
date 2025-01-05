@@ -2,6 +2,7 @@ package com.example.InventoryManagement.service;
 
 
 import com.example.InventoryManagement.domain.Items;
+import com.example.InventoryManagement.domain.Orders;
 import com.example.InventoryManagement.mapper.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,14 +38,16 @@ public class ItemServiceImpl implements ItemsService{
         itemsMapper.itemAdd(items);
     }
 
-//    @Override
-//    public Optional<Stocks> getStockOne(int id) {
-//        return itemsMapper.stockSelectOne(id);
-//    }
     @Override
-    public void itemDetailUpdate(Items items) {
-        itemsMapper.itemDetailUpdate(items);
+    public void itemOrderAdd(Orders orders) {
+
     }
+
+//    @Override
+//    public void itemOrderAdd(Orders orders) {
+//        itemsMapper.itemOrderAdd(orders);
+//    }
+
 
     @Override
     public void itemOrderDelete(Items delete) {
@@ -56,5 +59,33 @@ public class ItemServiceImpl implements ItemsService{
     @Override
     public List<Items> orderSelect() {
         return itemsMapper.orderSelect();
+    }
+
+
+    @Override
+    public List<Orders> orderAll() {
+        return itemsMapper.orderAll();
+    }
+
+    @Override
+    public void itemRequestOrder(Items items) {
+
+    }
+
+
+    //    @Override
+//    public void requestOrder(Items items) {
+//        itemsMapper.itemAdd(items);
+//        for (Stocks stocks : items.getStocksList()) {
+//            stocks.setItemsId(items.getId());
+//            itemsMapper.requestStock(stocks);
+//            for (Orders orders : stocks.ordersList) {
+//                orders.setStocksId(stocks.getId());
+//                itemsMapper.itemOrderAdd(orders);
+//            }
+//        }
+    @Override
+    public void itemOrderRequest(Items items, Orders orders) {
+        itemsMapper.itemRequestOrder(items, orders);
     }
 }

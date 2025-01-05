@@ -15,42 +15,65 @@
         LEFT JOIN orders ON stocks.id = orders.stocks_id
         WHERE items.id = #{id}
     </select>
-    <select id="itemsSelectOne" resultType="com.example.InventoryManagement.domain.Items" resultMap="itemsMap">
+    <select id="itemsSelectOne" resultMap="itemsMap">
         SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date,
         stocks.id, stocks.items_id, stocks.quantity,
-        orders.id, orders.stocks_id, orders.order_date FROM items
+        orders.id, orders.stocks_id, orders.order_date
+        FROM items
         LEFT JOIN stocks ON items.id = stocks.items_id
         LEFT JOIN orders ON stocks.id = orders.stocks_id
         WHERE items.id = #{id}
 
     </select>
 
+<!--    <select id="itemOrderOne" resultType="com.example.InventoryManagement.domain.Orders">-->
+<!--        SELECT orders.id, orders.stocks_id, orders.order_date FROM orders WHERE orders.id = #{id}-->
+<!--    </select>-->
+
     <insert id="itemAdd" useGeneratedKeys="true">
         INSERT INTO items(category, item) VALUES (#{category}, #{item})
     </insert>
-<!--quantityとorderDateに値が入っていないため、データベースから持ってこれるようにする。    -->
-<!--    <update id="itemDetailUpdate">-->
-<!--        UPDATE items LEFT JOIN stocks ON items.id = stocks.items_id LEFT JOIN orders ON stocks.id = orders.stocks_id-->
-<!--        SET stocks.quantity = stocks.quantity + orders.order_date-->
-<!--        WHERE items.id = #{id}-->
-<!--&lt;!&ndash;        <selectKey keyProperty="id" order="AFTER" resultType="com.example.InventoryManagement.domain.Orders">&ndash;&gt;-->
-<!--&lt;!&ndash;            INSERT INTO orders(id, stocks_id, order_date) VALUES (#{id}, #{stocksId}, #{stocksList.ordersList.orderDate})&ndash;&gt;-->
-<!--&lt;!&ndash;        </selectKey>&ndash;&gt;-->
-<!--    </update>-->
-    <delete id="deleteOrder">
-        DELETE items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items
-        INNER JOIN stocks ON items.id = stocks.items_id WHERE orders.id = #{id}
-    </delete>
+<!--TODO: 12/23 エラーの原因を探る    -->
+    <update id="itemDetailUpdate">
+        UPDATE items LEFT JOIN stocks ON items.id = stocks.items_id
+        LEFT JOIN orders ON stocks.id =
+        orders.stocks_id
+        SET
+        stocks.quantity = stocks.quantity + orders.orderDate
+        WHERE items.id = #{id}
+    </update>
+<!--    <delete id="deleteOrder">-->
+<!--        DELETE items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items-->
+<!--        INNER JOIN stocks ON items.id = stocks.items_id WHERE orders.id = #{id}-->
+<!--    </delete>-->
 
-    <insert id="itemRequestOrder" useGeneratedKeys="true">
-        <selectKey keyProperty="orders.id" resultType="com.example.InventoryManagement.domain.Items" order="BEFORE">
+<!--    <insert id="itemOrderAdd" useGeneratedKeys="true" keyProperty="id">-->
+<!--        INSERT INTO orders(stocks_id, order_date) VALUES #{stocks_id}, #{order_date}-->
+<!--        <selectKey resultType="com.example.InventoryManagement.domain.Orders" keyProperty="id" order="AFTER">-->
+<!--            SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date,-->
+<!--            stocks.id, stocks.items_id, stocks.quantity,-->
+<!--            orders.id, orders.stocks_id, orders.order_date-->
+<!--            FROM items-->
+<!--            LEFT JOIN stocks ON items.id = stocks.items_id-->
+<!--            LEFT JOIN orders ON stocks.id = orders.stocks_id-->
+<!--            WHERE items.id = #{id}-->
+<!--        </selectKey>-->
+<!--    </insert>-->
+    <insert id="itemOrderRequest" useGeneratedKeys="true">
+        INSERT INTO orders(id, stocks_id, order_date) VALUES (#{id}, #{stocksId}, #{orderDate})
+        <selectKey keyProperty="orders.id" resultType="com.example.InventoryManagement.domain.Items" order="AFTER">
             SELECT items.id, stocks.id, stocks.items_id, stocks.quantity,
             orders.id, orders.stocks_id, orders.order_date FROM items
             LEFT JOIN stocks ON items.id = stocks.items_id
             LEFT JOIN orders ON stocks.id = orders.stocks_id
             WHERE items.id = #{id}
         </selectKey>
-        INSERT INTO orders(id, stocks_id, order_date) VALUES (#{id}, #{stocksId}, #{orderDate})
+<!--        <selectKey keyProperty="id" resultType="com.example.InventoryManagement.domain.Items" order="AFTER">-->
+<!--            SELECT id-->
+<!--        </selectKey>-->
+<!--        <selectKey keyProperty="id" resultType="com.example.InventoryManagement.domain.Orders" order="AFTER">-->
+<!--            SELECT id-->
+<!--        </selectKey>-->
     </insert>
 
 
@@ -73,7 +96,6 @@
             <result property="updateDate" column="update_date" />
             <collection property="ordersList" ofType="com.example.InventoryManagement.domain.Orders">
                 <id property="id" column="id" />
-                <result property="itemsId" column="items_id" />
                 <result property="stocksId" column="stocks_id" />
                 <result property="orderDate" column="order_date" />
                 <result property="deliveryDate" column="delivery_date" />

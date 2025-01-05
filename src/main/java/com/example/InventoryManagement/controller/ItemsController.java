@@ -2,11 +2,8 @@ package com.example.InventoryManagement.controller;
 
 
 import com.example.InventoryManagement.domain.Items;
-//import com.example.InventoryManagement.domain.Orders;
-//import com.example.InventoryManagement.domain.Stocks;
-import com.example.InventoryManagement.form.ItemRequestForm;
+import com.example.InventoryManagement.domain.Orders;
 import com.example.InventoryManagement.service.ItemsService;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -63,7 +60,7 @@ public class ItemsController {
 //        model.addAttribute("select", items);
 //        return "items/form";
 //    }
-    //TODO: 品番登録後、個数入力できるようにする
+
     @GetMapping("itemRequestEdit")
     public String formItemAdd(@ModelAttribute Items items, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
@@ -86,33 +83,31 @@ public class ItemsController {
         return "items/itemQuantityUpdate";
     }
 
-    //TODO: 12/18　注文追加処理を実装を目指す
+
     @GetMapping("itemOrderEdit")
     public String orderComplete() {
         return "items/itemOrderEdit";
     }
 
 
-//    @GetMapping("itemOrderRequest/{id}")
-//    String newOrder(@PathVariable("id")int id, @RequestBody(required = false) Model model) {
-//        Optional<Orders> i = itemsService.orderSelectOne(id);
-//        i.ifPresentOrElse(inside -> {
-//            model.addAttribute("item", inside);
-//        }, () -> {
-//            System.out.println("i");
-//        });
-//        return "items/itemOrderRequest";
-//    }
+    @GetMapping("itemOrderRequest")
+    String newOrder(@RequestBody(required = false) Model model) {
+        return "items/itemOrderRequest";
+    }
 
-//    @PostMapping("itemOrderRequest/{id}")
-//    String newOrder(@ModelAttribute Orders orders, BindingResult bindingResult, @RequestBody(required = false) Model model) {
-//        if(bindingResult.hasErrors()) {
-//           List<Orders> i = itemsService.orderAll();
+    @PostMapping("itemOrderRequest")
+    String newOrder(@ModelAttribute Items items, Orders orders, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            return "items/index";
+//           List<Items> i = itemsService.getSelectAll();
 //           model.addAttribute("orderRequest", i);
-//        }
-//        itemsService.itemRequestOrder(orders);
-//        return "items/index";
-//    }
+        }
+        List<Items> i = itemsService.getSelectAll();
+        model.addAttribute("orderRequest", i);
+        //TODO: INSERT後のSELECT処理についても記述する。
+        itemsService.itemOrderAdd(orders);
+        return "items/index";
+    }
 
 //    @GetMapping("itemOrderList/{id}")
 //    public String orderAdd(@PathVariable("id")int id, @ModelAttribute Orders orders, BindingResult bindingResult, Model model) {

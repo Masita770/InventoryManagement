@@ -34,7 +34,11 @@
 
             <th th:text="${order.item}"></th>
 
-                    <th th:text="${order.stocksList.quantity}"></th>
+<!--                    <th th:each="stock : ${order.stocksList.ordersList}">-->
+<!--        <th th:object="${stock}">-->
+<!--                        <th th:text="*{quantity}"></th>-->
+<!--                    </th>-->
+<!--        </th>-->
 
 <!--                        <th th:text="${order.stocksList.ordersList.orderDate}"></th>-->
 
