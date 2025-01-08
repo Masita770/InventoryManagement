@@ -16,15 +16,18 @@ public class Items {
     private String deletedDate;
 
     private List<Stocks> stocksList;
+
+    private List<Orders> ordersList;
 //    Orders ordersList;
 
-    public Items(int id,String category, String item, String registrationDate, String deletedDate, List<Stocks> stocksList) {
+    public Items(int id,String category, String item, String registrationDate, String deletedDate, List<Stocks> stocksList, List<Orders> ordersList) {
         this.id = id;
         this.category = category;
         this.item = item;
         this.registrationDate = registrationDate;
         this.deletedDate = deletedDate;
         this.stocksList = stocksList;
+        this.ordersList = ordersList;
 //        this.ordersList = ordersList;
     }
 }

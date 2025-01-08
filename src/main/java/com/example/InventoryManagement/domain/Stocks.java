@@ -17,13 +17,12 @@ public class Stocks {
     private int itemsId;
     private int quantity;
     private String updateDate;
-    public List<Orders> ordersList;
 
-    public Stocks(int id, int itemsId, int quantity, String updateDate, List<Orders> ordersList) {
+
+    public Stocks(int id, int itemsId, int quantity, String updateDate) {
         this.id = id;
         this.itemsId = itemsId;
         this.quantity = quantity;
         this.updateDate = updateDate;
-        this.ordersList = ordersList;
     }
 }
