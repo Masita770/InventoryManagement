@@ -33,6 +33,7 @@ public class ItemsController {
         return "items/index";
     }
 
+    //TODO: itemOrderList.htmlの処理をitemOrderRequestで実行する
     @GetMapping("itemOrderList/{id}")
     public String itemOrder(@PathVariable("id")int id, Model model) {
         Optional<Items> itemOrderList = itemsService.getItemOrderAll(id);
@@ -84,10 +85,10 @@ public class ItemsController {
     }
 
 
-    @GetMapping("itemOrderEdit")
-    public String orderComplete() {
-        return "items/itemOrderEdit";
-    }
+//    @GetMapping("itemOrderEdit")
+//    public String orderComplete() {
+//        return "items/itemOrderEdit";
+//    }
 
 
     @GetMapping("itemOrderRequest")
@@ -95,15 +96,12 @@ public class ItemsController {
         return "items/itemOrderRequest";
     }
 
-    @PostMapping("itemOrderRequest")
-    String newOrder(@ModelAttribute Items items, Orders orders, BindingResult bindingResult, Model model) {
+    @PostMapping("itemOrderEdit")
+    String newOrder(@RequestBody Orders orders, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
+            List<Orders> i = itemsService.orderAll();
             return "items/index";
-//           List<Items> i = itemsService.getSelectAll();
-//           model.addAttribute("orderRequest", i);
         }
-        List<Items> i = itemsService.getSelectAll();
-        model.addAttribute("orderRequest", i);
         //TODO: INSERT後のSELECT処理についても記述する。
         itemsService.itemOrderAdd(orders);
         return "items/index";
