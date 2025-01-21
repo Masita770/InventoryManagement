@@ -34,19 +34,19 @@ public class ItemsController {
     }
 
     //TODO: itemOrderList.htmlの処理をitemOrderRequestで実行する
-    @GetMapping("itemOrderList/{id}")
-    public String itemOrder(@PathVariable("id")int id, Model model) {
-        Optional<Items> itemOrderList = itemsService.getItemOrderAll(id);
-        itemOrderList.ifPresentOrElse(inside -> model.addAttribute("itemOrder", inside), () ->
-                model.addAttribute("not", itemOrderList));
-//        model.addAttribute("itemOrder", itemOrderList);
-        return "items/itemOrderList";
-    }
+//    @GetMapping("itemDetail/{id}")
+//    public String itemOrder(@PathVariable("id")int id, Model model) {
+//        Optional<Items> itemOrderList = itemsService.getItemOrderAll(id);
+//        itemOrderList.ifPresentOrElse(inside -> model.addAttribute("item", inside), () ->
+//                model.addAttribute("not", itemOrderList));
+////        model.addAttribute("itemOrder", itemOrderList);
+//        return "items/itemOrderList";
+//    }
 
 
     @GetMapping("itemDetail/{id}")
-    public String itemsOne(@PathVariable("id")int id, Model model) throws NotFoundException {
-        Optional<Items> itemsOne = itemsService.getSelectOne(id);
+    public String itemsOne(@PathVariable("id")int itemId, Model model) throws NotFoundException {
+        Optional<Items> itemsOne = itemsService.getSelectOne(itemId);
         itemsOne.ifPresentOrElse(inside -> model.addAttribute("item", inside), () ->
                 model.addAttribute("not", itemsOne)
         );
@@ -62,7 +62,7 @@ public class ItemsController {
 //        return "items/form";
 //    }
 
-    @GetMapping("itemRequestEdit")
+    @PostMapping("itemRequestEdit")
     public String formItemAdd(@ModelAttribute Items items, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
             List<Items> itemsList = itemsService.getSelectAll();
@@ -73,9 +73,10 @@ public class ItemsController {
         return "redirect:index";
     }
 
+
     @GetMapping("itemQuantityUpdate/{id}")
-    public String itemUpdate(@PathVariable("id") int id, Model model) {
-        Optional<Items> quantityUpdate = itemsService.getSelectOne(id);
+    public String itemUpdate(@PathVariable("id") int itemId, Model model) {
+        Optional<Items> quantityUpdate = itemsService.getSelectOne(itemId);
         quantityUpdate.ifPresentOrElse(inside -> {
             model.addAttribute("itemUpdate", inside);
         }, () -> {
@@ -85,51 +86,20 @@ public class ItemsController {
     }
 
 
-//    @GetMapping("itemOrderEdit")
-//    public String orderComplete() {
-//        return "items/itemOrderEdit";
-//    }
 
-
-    @GetMapping("itemOrderRequest")
+    @GetMapping("orderForm")
     String newOrder(@RequestBody(required = false) Model model) {
-        return "items/itemOrderRequest";
+        return "items/orderForm";
     }
 
-    @PostMapping("itemOrderEdit")
-    String newOrder(@RequestBody Orders orders, BindingResult bindingResult) {
+    //TODO: ordersに登録しようとして、itemsに行ってしまう理由を探す。
+    @PostMapping("orderForm")
+    String newOrder(@ModelAttribute Orders orders, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             List<Orders> i = itemsService.orderAll();
             return "items/index";
         }
-        //TODO: INSERT後のSELECT処理についても記述する。
-        itemsService.itemOrderAdd(orders);
+        itemsService.orderAdd(orders);
         return "items/index";
     }
-
-//    @GetMapping("itemOrderList/{id}")
-//    public String orderAdd(@PathVariable("id")int id, @ModelAttribute Orders orders, BindingResult bindingResult, Model model) {
-//        if(bindingResult.hasErrors()) {
-//            Optional<Items> itemsList = itemsService.getSelectOne(id);
-//            itemsList.ifPresentOrElse(inside -> {
-//                model.addAttribute("order", inside);
-//            }, () -> {
-//                System.out.println("");
-//                    }
-//            );
-//            model.addAttribute("item", itemsList);
-//            return "items/itemOrderList";
-//        }
-//        return "redirect:index";
-//    }
-
-        @GetMapping("r")
-        public String inventory(Model model) {
-            List<Items> select = itemsService.orderSelect();
-//            items.setStocksList(stocks.getItemsList().getStocksList());
-//            model.addAttribute("r", items);
-//            select.ifPresentOrElse(inside -> model.addAttribute("r", inside) , () ->
-            model.addAttribute("r", select);
-            return "items/r";
-        }
 }

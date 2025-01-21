@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class Items {
-    private int id;
+    private int itemId;
     private String category;
     private String item;
     private String registrationDate;
@@ -20,8 +20,8 @@ public class Items {
     private List<Orders> ordersList;
 //    Orders ordersList;
 
-    public Items(int id,String category, String item, String registrationDate, String deletedDate, List<Stocks> stocksList, List<Orders> ordersList) {
-        this.id = id;
+    public Items(int itemId,String category, String item, String registrationDate, String deletedDate, List<Stocks> stocksList, List<Orders> ordersList) {
+        this.itemId = itemId;
         this.category = category;
         this.item = item;
         this.registrationDate = registrationDate;

@@ -29,8 +29,8 @@ public class ItemServiceImpl implements ItemsService{
     }
 
     @Override
-    public Optional<Items> getSelectOne(int id) {
-        return itemsMapper.itemsSelectOne(id);
+    public Optional<Items> getSelectOne(int itemId) {
+        return itemsMapper.itemsSelectOne(itemId);
     }
 
     @Override
@@ -38,9 +38,11 @@ public class ItemServiceImpl implements ItemsService{
         itemsMapper.itemAdd(items);
     }
 
-    @Override
-    public void itemOrderAdd(Orders orders) {
 
+    // 在庫更新　注文データ追加
+    @Override
+    public void orderAdd(Orders orders) {
+        itemsMapper.orderAdd(orders);
     }
 
 //    @Override
@@ -70,22 +72,5 @@ public class ItemServiceImpl implements ItemsService{
     @Override
     public void itemRequestOrder(Items items) {
 
-    }
-
-
-    //    @Override
-//    public void requestOrder(Items items) {
-//        itemsMapper.itemAdd(items);
-//        for (Stocks stocks : items.getStocksList()) {
-//            stocks.setItemsId(items.getId());
-//            itemsMapper.requestStock(stocks);
-//            for (Orders orders : stocks.ordersList) {
-//                orders.setStocksId(stocks.getId());
-//                itemsMapper.itemOrderAdd(orders);
-//            }
-//        }
-    @Override
-    public void itemOrderRequest(Items items, Orders orders) {
-        itemsMapper.itemRequestOrder(items, orders);
     }
 }

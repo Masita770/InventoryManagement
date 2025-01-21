@@ -15,23 +15,18 @@ public interface ItemsMapper {
 
     Optional<Items> itemOrderAll(int id);
 
-    Optional<Items> itemsSelectOne(int id);
+    Optional<Items> itemsSelectOne(int itemId);
 
     void itemAdd(Items items);
 
     void orderAdd(Orders orders);
+    Orders orderOne(int orderId);
 
     List<Orders> orderAll();
-//    Optional<Orders> itemOrderOne(int id);
-//
 
-    void requestStock(Stocks stocks);
-    void itemOrderAdd(Items items);
 
     void deleteOrder(Items delete);
 
 
     List<Items> orderSelect();
-
-    void itemRequestOrder(Items items, Orders orders);
 }

@@ -25,32 +25,26 @@
     </thead>
     <tbody>
     <!--    <div th:object=""-->
-    <div th:each="order : ${itemOrder}">
+    <div th:object="${item}">
 <!--        <tr th:each="o : ${order.stocksList.ordersList}">-->
 
-            <th th:text="*{order.id}"></th>
+            <th th:text="*{id}"></th>
 
-            <th th:text="*{order.category}"></th>
+            <th th:text="*{category}"></th>
 
-            <th th:text="${order.item}"></th>
-
-<!--                    <th th:each="stock : ${order.stocksList.ordersList}">-->
-<!--        <th th:object="${stock}">-->
-<!--                        <th th:text="*{quantity}"></th>-->
-<!--                    </th>-->
-<!--        </th>-->
-
-<!--                        <th th:text="${order.stocksList.ordersList.orderDate}"></th>-->
-
-<!--            <th th:text="${o.orderDate}"></th>-->
+            <th th:text="*{item}"></th>
 
         </tr>
     </div>
-    <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/itemQuantityUpdate/{id}(id=${id})}">更新</a></td>
-    <div th:each="order : *{ordersList}">
-        <th th:text="${order.stocksList.ordersList.orderDate}">注文情報</th>
-        <td th:case= 4 th:text="オフィス用具"></td>
-    </div>
+    // TODO
+<!--    <form th:action="@{itemOrderList}" th:method="form" th:object="${newOrder}">-->
+<!--        <label class="control-label">数量</label>-->
+<!--        <input class="form-control" type="number" name="orderDate" />-->
+<!--    <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/itemQuantityUpdate/{id}(id=${id})}">更新</a></td>-->
+<!--    <form th:each="order : *{ordersList}">-->
+<!--        <th th:text="${order.ordersList.orderDate}">注文情報</th>-->
+<!--        <td th:case= 4 th:text="オフィス用具"></td>-->
+<!--    </form>-->
 
     </tbody>
 </table>

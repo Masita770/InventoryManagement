@@ -9,13 +9,13 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class Orders {
-    private int id;
+    private int orderId;
     private int itemsId;
     private int orderDate;
     private String deliveryDate;
 
-    public Orders(int id, int itemsId, int orderDate, String deliveryDate) {
-        this.id = id;
+    public Orders(int orderId, int itemsId, int orderDate, String deliveryDate) {
+        this.orderId = orderId;
         this.itemsId = itemsId;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;

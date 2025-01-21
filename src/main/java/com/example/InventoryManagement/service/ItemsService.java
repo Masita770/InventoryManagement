@@ -16,14 +16,14 @@ public interface ItemsService {
     Optional<Items> getItemOrderAll(int id);
 
     @Transactional
-    Optional<Items> getSelectOne(int id);
+    Optional<Items> getSelectOne(int itemId);
 
     @Transactional
     void requestItemAdd(Items items);
 
 
     @Transactional
-    void itemOrderAdd(Orders orders);
+    void orderAdd(Orders orders);
 
     @Transactional
     void itemOrderDelete(Items delete);
@@ -51,6 +51,5 @@ public interface ItemsService {
     //                itemsMapper.itemOrderAdd(orders);
     //            }
     //        }
-    void itemOrderRequest(Items items, Orders orders);
 }
 
