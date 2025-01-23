@@ -28,7 +28,7 @@
     <div th:object="${item}">
 <!--        <tr th:each="o : ${order.stocksList.ordersList}">-->
 
-            <th th:text="*{id}"></th>
+            <th th:text="*{itemId}"></th>
 
             <th th:text="*{category}"></th>
 
@@ -36,17 +36,8 @@
 
         </tr>
     </div>
-    // TODO
-<!--    <form th:action="@{itemOrderList}" th:method="form" th:object="${newOrder}">-->
-<!--        <label class="control-label">数量</label>-->
-<!--        <input class="form-control" type="number" name="orderDate" />-->
-<!--    <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/itemQuantityUpdate/{id}(id=${id})}">更新</a></td>-->
-<!--    <form th:each="order : *{ordersList}">-->
-<!--        <th th:text="${order.ordersList.orderDate}">注文情報</th>-->
-<!--        <td th:case= 4 th:text="オフィス用具"></td>-->
-<!--    </form>-->
-
     </tbody>
+    <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderForm}">製品注文</a></td>
 </table>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

@@ -5,20 +5,20 @@
 <mapper namespace="com.example.InventoryManagement.mapper.ItemsMapper">
 
     <select id="itemsSelectAll" resultMap="itemsMap">
-        SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items
-        LEFT JOIN stocks ON items.id = stocks.items_id
+        SELECT items.item_id, items.category, items.item, items.registration_date, items.deleted_date, stocks.stock_id, stocks.items_id, stocks.quantity FROM items
+        LEFT JOIN stocks ON items.item_id = stocks.items_id
     </select>
     <select id="itemOrderAll" resultMap="itemsMap">
-        SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items
-        LEFT JOIN stocks ON items.id = stocks.items_id
+        SELECT items.item_id, items.category, items.item, items.registration_date, items.deleted_date, stocks.stock_id, stocks.items_id, stocks.quantity FROM items
+        LEFT JOIN stocks ON items.item_id = stocks.items_id
         WHERE items.id = #{id}
     </select>
     <select id="itemsSelectOne" resultMap="itemsMap">
-        SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date,
-        stocks.id, stocks.items_id, stocks.quantity
+        SELECT items.item_id, items.category, items.item, items.registration_date, items.deleted_date,
+        stocks.stock_id, stocks.items_id, stocks.quantity
         FROM items
-        LEFT JOIN stocks ON items.id = stocks.items_id
-        WHERE items.id = #{id}
+        LEFT JOIN stocks ON items.item_id = stocks.items_id
+        WHERE items.item_id = #{itemId}
 
     </select>
 
@@ -28,46 +28,46 @@
     </insert>
 <!--TODO: 12/23 エラーの原因を探る    -->
     <update id="itemDetailUpdate">
-        UPDATE items LEFT JOIN stocks ON items.id = stocks.items_id
-        LEFT JOIN orders ON items.id =
+        UPDATE items LEFT JOIN stocks ON items.item_id = stocks.items_id
+        LEFT JOIN orders ON items.item_id =
         orders.items_id
         SET
         stocks.quantity = stocks.quantity + orders.orderDate
-        WHERE items.id = #{id} AND is_deleted = null
+        WHERE items.item_id = #{itemId} AND is_deleted = null
     </update>
 
     <insert id="orderAdd" useGeneratedKeys="true" keyProperty="orderId" parameterType="com.example.InventoryManagement.domain.Orders">
-        INSERT INTO orders(stocks_id, order_date) VALUES (#{stocks_id}, #{order_date})
+        INSERT INTO orders(order_id, items_id, order_date) VALUES (order_id, #{items_id}, #{order_date})
         <selectKey resultType="com.example.InventoryManagement.domain.Orders" keyProperty="id" order="AFTER">
-            SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date,
-            stocks.id, stocks.items_id, stocks.quantity,
+            SELECT items.item_id, items.category, items.item, items.registration_date, items.deleted_date,
+            stocks.stock_id, stocks.items_id, stocks.quantity,
             orders.id, orders.stocks_id, orders.order_date
             FROM items
-            LEFT JOIN stocks ON items.id = stocks.items_id
-            LEFT JOIN orders ON items.id = orders.items_id
-            WHERE items.id = #{id}
+            LEFT JOIN stocks ON items.item_id = stocks.items_id
+            LEFT JOIN orders ON items.item_id = orders.items_id
+            WHERE items.item_id = #{itemId}
         </selectKey>
     </insert>
-    <insert id="orderAdd" useGeneratedKeys="true">
-        INSERT INTO orders(id, stocks_id, order_date) VALUES (#{id}, #{stocksId}, #{orderDate})
-        <selectKey keyProperty="orders.id" resultType="com.example.InventoryManagement.domain.Items" order="AFTER">
-            SELECT items.id, stocks.id, stocks.items_id, stocks.quantity,
-            orders.id, orders.stocks_id, orders.order_date FROM items
-            LEFT JOIN stocks ON items.id = stocks.items_id
-            LEFT JOIN orders ON stocks.id = orders.stocks_id
-            WHERE items.id = #{id}
-        </selectKey>
-    </insert>
+<!--    <insert id="orderAdd" useGeneratedKeys="true">-->
+<!--        INSERT INTO orders(id, stocks_id, order_date) VALUES (#{id}, #{stocksId}, #{orderDate})-->
+<!--        <selectKey keyProperty="orders.id" resultType="com.example.InventoryManagement.domain.Items" order="AFTER">-->
+<!--            SELECT items.id, stocks.id, stocks.items_id, stocks.quantity,-->
+<!--            orders.id, orders.stocks_id, orders.order_date FROM items-->
+<!--            LEFT JOIN stocks ON items.id = stocks.items_id-->
+<!--            LEFT JOIN orders ON stocks.id = orders.stocks_id-->
+<!--            WHERE items.id = #{id}-->
+<!--        </selectKey>-->
+<!--    </insert>-->
 
 
     <select id="orderSelect" resultMap="itemsMap">
-        SELECT items.id, items.category, items.item, items.registration_date, items.deleted_date, stocks.id, stocks.items_id, stocks.quantity FROM items  INNER JOIN stocks ON items.id = stocks.items_id
+        SELECT items.item_id, items.category, items.item, items.registration_date, items.deleted_date, stocks.stock_id, stocks.items_id, stocks.quantity FROM items  INNER JOIN stocks ON items.id = stocks.items_id
     </select>
 
 
 
     <resultMap type="com.example.InventoryManagement.domain.Items" id="itemsMap">
-        <id property="id" column="id" />
+        <id property="itemId" column="item_id" />
         <result property="category" column="category" />
         <result property="item" column="item" />
         <result property="registrationDate" column="registration_date" />
@@ -76,13 +76,13 @@
         <collection property="ordersList" resultMap="orderMap" />
     </resultMap>
     <resultMap id="stockMap" type="com.example.InventoryManagement.domain.Stocks">
-        <id property="id" column="id" />
+        <id property="stockId" column="stock_id" />
         <result property="itemsId" column="items_id" />
         <result property="quantity" column="quantity" />
         <result property="updateDate" column="update_date" />
     </resultMap>
     <resultMap id="orderMap" type="com.example.InventoryManagement.domain.Orders">
-        <id property="id" column="id" />
+        <id property="orderId" column="order_id" />
         <result property="itemsId" column="items_id" />
         <result property="orderDate" column="order_date" />
         <result property="deliveryDate" column="delivery_date" />

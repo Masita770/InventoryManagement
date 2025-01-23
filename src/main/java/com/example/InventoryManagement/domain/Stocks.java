@@ -13,14 +13,14 @@ import java.util.Optional;
 @Getter
 @NoArgsConstructor
 public class Stocks {
-    private int id;
+    private int stockId;
     private int itemsId;
     private int quantity;
     private String updateDate;
 
 
-    public Stocks(int id, int itemsId, int quantity, String updateDate) {
-        this.id = id;
+    public Stocks(int stockId, int itemsId, int quantity, String updateDate) {
+        this.stockId = stockId;
         this.itemsId = itemsId;
         this.quantity = quantity;
         this.updateDate = updateDate;
