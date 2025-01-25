@@ -26,7 +26,6 @@
     <insert id="itemAdd" useGeneratedKeys="true" keyProperty="itemId" parameterType="com.example.InventoryManagement.domain.Items">
         INSERT INTO items(category, item) VALUES (#{category}, #{item})
     </insert>
-<!--TODO: 12/23 エラーの原因を探る    -->
     <update id="itemDetailUpdate">
         UPDATE items LEFT JOIN stocks ON items.item_id = stocks.items_id
         LEFT JOIN orders ON items.item_id =
