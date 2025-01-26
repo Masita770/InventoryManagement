@@ -12,7 +12,9 @@ Spring Boot 3.0.5
 MySQL 5.7.33
 
 # ER図
-![image](https://github.com/user-attachments/assets/b06d0368-79f4-4aed-b697-114ccad6d75b)
+![image](https://github.com/user-attachments/assets/cf3623ba-e11c-428f-b78a-7da8731900af)
+
+
 
 
 
@@ -20,7 +22,7 @@ MySQL 5.7.33
 ## itemsテーブル
 |列名             |データ型         |備考            | 
 |-----------------|----------------|----------------|
-|id               |int(11)         |Auto_increment  |
+|item_id          |int(11)         |Auto_increment  |
 |category         |varchar(100)    |                |
 |item             |varchar(100)    |                |
 |registration_date|timestamp       |                |
@@ -29,7 +31,7 @@ MySQL 5.7.33
 ## stocksテーブル
 |列名             |データ型         |備考            |
 |-----------------|----------------|----------------|
-|id               |int(11)         |Auto_increment  |
+|stock_id         |int(11)         |Auto_increment  |
 |items  _id       |int(11)         |                |
 |quantity         |int(100)        |                |
 |update_date      |timestamp       |                |
@@ -39,7 +41,7 @@ MySQL 5.7.33
 ## ordersテーブル
 |列名             |データ型         |備考            | 
 |-----------------|----------------|----------------|
-|id               |int(11)         |Auto_increment  |
+|order_id         |int(11)         |Auto_increment  |
 |items_id         |int(11)         |                |
 |stocks_id        |int(11)         |                |
 |order_date       |timestamp       |                |
