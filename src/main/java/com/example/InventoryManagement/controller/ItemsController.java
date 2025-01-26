@@ -33,16 +33,6 @@ public class ItemsController {
         return "items/index";
     }
 
-    //TODO: itemOrderList.htmlの処理をitemOrderRequestで実行する
-//    @GetMapping("itemDetail/{id}")
-//    public String itemOrder(@PathVariable("id")int id, Model model) {
-//        Optional<Items> itemOrderList = itemsService.getItemOrderAll(id);
-//        itemOrderList.ifPresentOrElse(inside -> model.addAttribute("item", inside), () ->
-//                model.addAttribute("not", itemOrderList));
-////        model.addAttribute("itemOrder", itemOrderList);
-//        return "items/itemOrderList";
-//    }
-
 
     @GetMapping("itemDetail/{id}")
     public String itemsOne(@PathVariable("id")int itemId, Model model) throws NotFoundException {
@@ -53,14 +43,14 @@ public class ItemsController {
         return "items/itemDetail";
     }
 
-//    @GetMapping("form")
-//    public String newItem(Model model, Items items) {
+    @GetMapping("form")
+    public String newItem(@RequestBody(required = false) Model model, Items items) {
 //        ItemRequestForm itemRequestForm = new ItemRequestForm();
 //       items.setCategory(itemRequestForm.getCategory());
 //       items.setItem(itemRequestForm.getItem());
 //        model.addAttribute("select", items);
-//        return "items/form";
-//    }
+        return "items/form";
+    }
 
     @PostMapping("itemRequestEdit")
     public String formItemAdd(@ModelAttribute Items items, BindingResult bindingResult, Model model) {
@@ -88,18 +78,19 @@ public class ItemsController {
 
 
     @GetMapping("orderForm")
-    String newOrder(@RequestBody(required = false) Model model) {
+    String newOrder(@RequestBody(required = false) Orders orders, Model model) {
         return "items/orderForm";
     }
 
     //TODO: ordersに登録しようとして、itemsに行ってしまう理由を探す。
-    @PostMapping("orderForm")
-    String newOrder(@ModelAttribute Orders orders, BindingResult bindingResult) {
+    @PostMapping("itemOrderEdit")
+    public String orderRequest(@ModelAttribute Orders orders, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
             List<Orders> i = itemsService.orderAll();
-            return "items/index";
+            model.addAttribute("i", i);
+            return "items/itemOrderEdit";
         }
         itemsService.orderAdd(orders);
-        return "items/index";
+        return "redirect:index";
     }
 }
