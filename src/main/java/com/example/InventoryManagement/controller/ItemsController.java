@@ -78,17 +78,17 @@ public class ItemsController {
 
 
     @GetMapping("orderForm")
-    String newOrder(@RequestBody(required = false) Orders orders, Model model) {
+    public String newOrder(Model model) {
         return "items/orderForm";
     }
 
     //TODO: ordersに登録しようとして、itemsに行ってしまう理由を探す。
-    @PostMapping("itemOrderEdit")
+    @PostMapping("orderRequestEdit")
     public String orderRequest(@ModelAttribute Orders orders, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
             List<Orders> i = itemsService.orderAll();
             model.addAttribute("i", i);
-            return "items/itemOrderEdit";
+            return "items/index";
         }
         itemsService.orderAdd(orders);
         return "redirect:index";

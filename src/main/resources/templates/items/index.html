@@ -51,14 +51,14 @@
 
 
             <td><a class="btn btn-outline-primary btn-sm" th:href="@{itemDetail/{id}(id=${item.itemId})}">参照</a></td>
-            <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderForm}">製品注文</a></td>
+<!--            <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderForm}">製品注文</a></td>-->
 
 
 
         </tr>
         </tr>
     </div>
-
+    <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderForm}">製品注文</a></td>
     </tbody>
     <div class="text-center">
         <input type="submit" value="新規登録" class="btn btn-primary" href="product/edit" />
