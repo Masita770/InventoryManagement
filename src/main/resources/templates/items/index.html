@@ -32,7 +32,7 @@
         <tr class="items" th:each="item : ${items}">
 <!--            <tr th:each="itemDate : ${item.stocksList.ordersList}">-->
 
-            <th th:text="${item.itemId}"></th>
+            <th th:text="${item.itemsId}"></th>
 
             <th th:text="${item.category}"></th>
 
@@ -50,7 +50,7 @@
 <!--            <th th:text="${itemDate.orderDate}"></th>-->
 
 
-            <td><a class="btn btn-outline-primary btn-sm" th:href="@{itemDetail/{id}(id=${item.itemId})}">参照</a></td>
+            <td><a class="btn btn-outline-primary btn-sm" th:href="@{itemDetail/{id}(id=${item.itemsId})}">参照</a></td>
 <!--            <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderForm}">製品注文</a></td>-->
 
 

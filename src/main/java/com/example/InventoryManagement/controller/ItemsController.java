@@ -35,8 +35,8 @@ public class ItemsController {
 
 
     @GetMapping("itemDetail/{id}")
-    public String itemsOne(@PathVariable("id")int itemId, Model model) throws NotFoundException {
-        Optional<Items> itemsOne = itemsService.getSelectOne(itemId);
+    public String itemsOne(@PathVariable("id")int itemsId, Model model) throws NotFoundException {
+        Optional<Items> itemsOne = itemsService.getSelectOne(itemsId);
         itemsOne.ifPresentOrElse(inside -> model.addAttribute("item", inside), () ->
                 model.addAttribute("not", itemsOne)
         );
@@ -65,8 +65,8 @@ public class ItemsController {
 
 
     @GetMapping("itemQuantityUpdate/{id}")
-    public String itemUpdate(@PathVariable("id") int itemId, Model model) {
-        Optional<Items> quantityUpdate = itemsService.getSelectOne(itemId);
+    public String itemUpdate(@PathVariable("id") int itemsId, Model model) {
+        Optional<Items> quantityUpdate = itemsService.getSelectOne(itemsId);
         quantityUpdate.ifPresentOrElse(inside -> {
             model.addAttribute("itemUpdate", inside);
         }, () -> {
@@ -83,14 +83,16 @@ public class ItemsController {
     }
 
     //TODO: ordersに登録しようとして、itemsに行ってしまう理由を探す。
-    @PostMapping("orderRequestEdit")
-    public String orderRequest(@ModelAttribute Orders orders, BindingResult bindingResult, Model model) {
+    @PostMapping("itemOrderEdit")
+    public String orderRequest(@ModelAttribute Orders orders, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            List<Orders> i = itemsService.orderAll();
-            model.addAttribute("i", i);
+//            List<Orders> i = itemsService.orderAll();
+//            model.addAttribute("i", i);
             return "items/index";
         }
+//        int itemsId = orders.getItemsId();
+//        int orderDate = orders.getOrderDate();
         itemsService.orderAdd(orders);
-        return "redirect:index";
+        return "items/itemOrderEdit";
     }
 }

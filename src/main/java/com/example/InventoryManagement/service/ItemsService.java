@@ -16,7 +16,7 @@ public interface ItemsService {
     Optional<Items> getItemOrderAll(int id);
 
     @Transactional
-    Optional<Items> getSelectOne(int itemId);
+    Optional<Items> getSelectOne(int itemsId);
 
 //    @Transactional
     void requestItemAdd(Items items);

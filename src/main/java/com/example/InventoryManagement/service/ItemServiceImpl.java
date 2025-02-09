@@ -29,8 +29,8 @@ public class ItemServiceImpl implements ItemsService{
     }
 
     @Override
-    public Optional<Items> getSelectOne(int itemId) {
-        return itemsMapper.itemsSelectOne(itemId);
+    public Optional<Items> getSelectOne(int itemsId) {
+        return itemsMapper.itemsSelectOne(itemsId);
     }
 
     @Override
@@ -42,6 +42,10 @@ public class ItemServiceImpl implements ItemsService{
     // 在庫更新　注文データ追加
     @Override
     public void orderAdd(Orders orders) {
+//        Optional<Items> items = itemsMapper.itemsSelectOne(orders.getItemsId());
+//        if(items == null) {
+//            throw  new RuntimeException("この製品は存在しません");
+//        }
         itemsMapper.orderAdd(orders);
     }
 
