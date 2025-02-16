@@ -2,7 +2,6 @@ package com.example.InventoryManagement.domain;
 
 import lombok.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Setter
@@ -20,14 +19,17 @@ public class Items {
     private List<Orders> ordersList;
 //    Orders ordersList;
 
-    public Items(int itemsId,String category, String item, String registrationDate, String deletedDate, List<Stocks> stocksList, List<Orders> ordersList) {
-        this.itemsId = itemsId;
-        this.category = category;
-        this.item = item;
-        this.registrationDate = registrationDate;
-        this.deletedDate = deletedDate;
-        this.stocksList = stocksList;
-        this.ordersList = ordersList;
+    public Items(int itemsId,String category, String item, String registrationDate, String deletedDate) {
+//        this.itemsId = itemsId;
+//        this.category = category;
+//        this.item = item;
+//        this.registrationDate = registrationDate;
+//        this.deletedDate = deletedDate;
+//        this.stocksList = stocksList;
+//        this.ordersList = ordersList;
 //        this.ordersList = ordersList;
     }
+
+//    public Items(int itemsId) {
+//    }
 }
