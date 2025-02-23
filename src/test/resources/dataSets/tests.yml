@@ -1,0 +1,16 @@
+items:
+  - itemsId: 1
+    category:  "机"
+    item:  "オフィスデスク"
+    registrationDate:  "0000-00-00 00:00:00"
+    deletedDate:  "0000-00-00 00:00:00"
+  - itemsId: 2
+    category:  "机"
+    item:  "キッチンテーブル"
+    registrationDate:  "0000-00-00 00:00:00"
+    deletedDate:  "0000-00-00 00:00:00"
+  - itemsId: 3
+    category:  "机"
+    item:  "ゲーミングデスク"
+    registrationDate:  "2024-09-16 22:36:15"
+    deletedDate:  "0000-00-00 00:00:00"
