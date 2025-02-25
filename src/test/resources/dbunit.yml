@@ -1,0 +1,19 @@
+cacheConnection: true
+cacheTableNames: true
+leakHunter: true
+raiseExceptionOnCleanUp: true
+disableSequenceFiltering: true
+alwaysCleanBefore: true
+alwaysCleanAfter: true
+expectedDbType: HSQLDB
+mergingStrategy: CLASS
+columnSensing: true
+disablePKCheckFor: ["items"]
+properties:
+  caseSensitiveTableNames: true
+  schema: null
+caseInsensitiveStrategy: LOWERCASE
+#connectionConfig:
+#  url: jdbc:mysql://localhost:3306/inventorymanagement?zeroDateTimeBehavior=convertToNull
+#  user: "root"
+#  password: "sei1025itu7z"
