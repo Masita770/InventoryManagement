@@ -5,13 +5,13 @@ raiseExceptionOnCleanUp: true
 disableSequenceFiltering: true
 alwaysCleanBefore: true
 alwaysCleanAfter: true
-expectedDbType: HSQLDB
+expectedDbType: H2
 mergingStrategy: CLASS
 columnSensing: true
 disablePKCheckFor: ["items"]
 properties:
   caseSensitiveTableNames: true
-  schema: null
+  schema: schema.items
 caseInsensitiveStrategy: LOWERCASE
 #connectionConfig:
 #  url: jdbc:mysql://localhost:3306/inventorymanagement?zeroDateTimeBehavior=convertToNull
