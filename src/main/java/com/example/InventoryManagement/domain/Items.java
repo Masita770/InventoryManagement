@@ -4,8 +4,10 @@ import lombok.*;
 
 import java.util.List;
 
+@Data
 @Setter
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class Items {
     private int itemsId;
@@ -20,14 +22,14 @@ public class Items {
 //    Orders ordersList;
 
     public Items(int itemsId,String category, String item, String registrationDate, String deletedDate) {
-//        this.itemsId = itemsId;
-//        this.category = category;
-//        this.item = item;
-//        this.registrationDate = registrationDate;
-//        this.deletedDate = deletedDate;
-//        this.stocksList = stocksList;
-//        this.ordersList = ordersList;
-//        this.ordersList = ordersList;
+        this.itemsId = itemsId;
+        this.category = category;
+        this.item = item;
+        this.registrationDate = registrationDate;
+        this.deletedDate = deletedDate;
+        this.stocksList = stocksList;
+        this.ordersList = ordersList;
+        this.ordersList = ordersList;
     }
 
 //    public Items(int itemsId) {
