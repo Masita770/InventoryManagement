@@ -6,6 +6,3 @@ CREATE TABLE IF NOT EXISTS items(
     deleted_date timestamp,
     PRIMARY KEY(id)
     );
-
-CREATE TABLE IF NOT EXISTS stocks(
-    )
