@@ -22,7 +22,7 @@ MySQL 5.7.33
 ## itemsテーブル
 |列名             |データ型         |備考            | 
 |-----------------|----------------|----------------|
-|item_id          |int(11)         |Auto_increment  |
+|items_id         |int(11)         |Auto_increment  |
 |category         |varchar(100)    |                |
 |item             |varchar(100)    |                |
 |registration_date|timestamp       |                |
@@ -31,7 +31,7 @@ MySQL 5.7.33
 ## stocksテーブル
 |列名             |データ型         |備考            |
 |-----------------|----------------|----------------|
-|stock_id         |int(11)         |Auto_increment  |
+|stocks_id        |int(11)         |Auto_increment  |
 |items  _id       |int(11)         |                |
 |quantity         |int(100)        |                |
 |update_date      |timestamp       |                |
@@ -41,7 +41,7 @@ MySQL 5.7.33
 ## ordersテーブル
 |列名             |データ型         |備考            | 
 |-----------------|----------------|----------------|
-|order_id         |int(11)         |Auto_increment  |
+|orders_id        |int(11)         |Auto_increment  |
 |items_id         |int(11)         |                |
 |stocks_id        |int(11)         |                |
 |order_date       |timestamp       |                |
