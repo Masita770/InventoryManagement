@@ -12,7 +12,8 @@ Spring Boot 3.0.5
 MySQL 5.7.33
 
 # ER図
-![image](https://github.com/user-attachments/assets/514b82bd-0171-43e0-b7a0-d6d37c13dba4)
+![image](https://github.com/user-attachments/assets/b272cbbb-143e-4434-8ec2-f1567bc3b122)
+
 
 
 
