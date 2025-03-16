@@ -13,7 +13,7 @@ public interface ItemsService {
 
     List<Items> getSelectAll();
 
-    Optional<Items> getItemOrderAll(int id);
+//    Optional<Items> getItemOrderAll(int id);
 
     @Transactional
     Optional<Items> getSelectOne(int itemsId);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+//@RestController
 @Controller
 @RequestMapping("/items")
 public class ItemsController {
@@ -26,7 +27,7 @@ public class ItemsController {
         this.itemsService = itemsService;
     }
 
-    @RequestMapping("index")
+    @RequestMapping("/index")
     public String itemsAll(Model model) {
         List<Items> getAll = itemsService.getSelectAll();
         model.addAttribute("items", getAll);
