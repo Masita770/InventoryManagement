@@ -2,15 +2,26 @@ items:
   - items_id:
     category:  "desk"
     item:  "オフィスデスク"
-    registration_date:  "2025-03-06 23:45:18"
+    registration_date:  "2025-03-16 21:01:30"
     deleted_date:  "0000-00-00 00:00:00"
+    stocksList:  null
+    ordersList:  null
   - items_id:  2
     category:  "机"
     item:  "キッチンテーブル"
-    registration_date:  "2025-03-06 23:45:57"
+    registration_date:  "2025-03-12 23:43:21"
     deleted_date:  "0000-00-00 00:00:00"
+    stocksList:  null
+    ordersList:  null
   - items_id:  3
     category:  "机"
     item:  "ゲーミングデスク"
-    registration_date:  "2025-03-06 23:46:32"
+    registration_date:  "2025-03-12 23:43:21"
     deleted_date:  "0000-00-00 00:00:00"
+    stocksList:  null
+    ordersList:  null
+stocks:
+  - stocks_id:
+    items_id:
+    quantity:
+    update_date:
