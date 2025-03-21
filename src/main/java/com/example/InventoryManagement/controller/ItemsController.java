@@ -34,6 +34,13 @@ public class ItemsController {
         return "items/index";
     }
 
+    @RequestMapping()
+    public String orderAll(Model model) {
+        List<Orders> orders = itemsService.getOrderAll();
+        model.addAttribute("orders", orders);
+        return "items/orderList";
+    }
+
 
     @GetMapping("itemDetail/{id}")
     public String itemsOne(@PathVariable("id")int itemsId, Model model) throws NotFoundException {

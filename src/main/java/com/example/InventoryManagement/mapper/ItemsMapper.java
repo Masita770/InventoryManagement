@@ -13,7 +13,7 @@ public interface ItemsMapper {
 
     List<Items> itemsSelectAll();
 
-    Optional<Items> itemOrderAll(int id);
+    List<Orders> orderAll();
 
     Optional<Items> itemsSelectOne(int itemId);
 
@@ -21,8 +21,6 @@ public interface ItemsMapper {
 
     void orderAdd(Orders orders);
     Orders orderOne(int orderId);
-
-    List<Orders> orderAll();
 
 
     void deleteOrder(Items delete);
