@@ -4,6 +4,7 @@ package com.example.InventoryManagement.controller;
 import com.example.InventoryManagement.domain.Items;
 import com.example.InventoryManagement.domain.Orders;
 import com.example.InventoryManagement.service.ItemsService;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -34,10 +35,15 @@ public class ItemsController {
         return "items/index";
     }
 
-    @RequestMapping()
-    public String orderAll(Model model) {
-        List<Orders> orders = itemsService.getOrderAll();
+    // TODO: rest処理で実行するべし
+    @GetMapping("orderList")
+    public String orderAll(@RequestParam(value = "itemsId") int itemsId, Model model) {
+        List<Orders> orders = itemsService.getOrderAll(itemsId);
         model.addAttribute("orders", orders);
+//        Optional<Orders> orders = itemsService.getOrderAll(itemsId);
+//        orders.ifPresentOrElse(inside -> model.addAttribute("orders", orders), () ->
+//                model.addAttribute("requestError", orders)
+//        );
         return "items/orderList";
     }
 
