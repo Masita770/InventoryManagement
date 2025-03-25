@@ -19,7 +19,7 @@ public interface ItemsService {
     Optional<Items> getSelectOne(int itemsId);
 
     @Transactional
-    List<Orders> getOrderAll();
+    List<Orders> getOrderAll(int itemsId);
 
 //    @Transactional
     void requestItemAdd(Items items);
@@ -37,8 +37,8 @@ public interface ItemsService {
 
 // TODO: Ordersを排した修正をSeviceimplで行う
     // 発注処理
-    @Transactional
-    List<Orders> orderAll();
+//    @Transactional
+//    List<Orders> orderAll();
 
     @Transactional
     void itemRequestOrder(Items items);

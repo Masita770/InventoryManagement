@@ -30,7 +30,6 @@
     <tbody>
     <div class="list">
         <tr th:each="item : ${items}">
-<!--            <tr th:each="itemDate : ${item.stocksList.ordersList}">-->
 
             <th th:text="${item.itemsId}"></th>
 
@@ -40,23 +39,14 @@
 
             <th th:text="${item.registrationDate}"></th>
 
-
-<!--            <li th:each="stock : ${item.stocksList}">-->
-<!--                <th th:text="${stock.quantity}"></th>-->
-<!--            </li>-->
-
-<!--            <th th:text="${items.deletedDate}"></th>-->
-
-<!--            <th th:text="${itemDate.orderDate}"></th>-->
-
-
             <td><a class="btn btn-outline-primary btn-sm" th:href="@{itemDetail/{id}(id=${item.itemsId})}">参照</a></td>
-            <td><a class="btn btn-outline-primary btn-sm" th:href="@{orderList}">注文数</a></td>
+<!--            </tr>-->
+            <td><a class="btn btn-outline-primary btn-sm" th:href="@{orderList/{id}(id=${item.itemsId})}">注文数一覧</a></td>
 <!--            <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderForm}">製品注文</a></td>-->
 
 
 
-        </tr>
+        </li>
         </tr>
     </div>
     <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderForm}">製品注文</a></td>

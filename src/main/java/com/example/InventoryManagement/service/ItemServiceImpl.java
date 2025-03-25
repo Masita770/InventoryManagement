@@ -23,10 +23,10 @@ public class ItemServiceImpl implements ItemsService{
         return itemsMapper.itemsSelectAll();
     }
 
-//    @Override
-//    public Optional<Items> getItemOrderAll(int id) {
-//        return itemsMapper.itemOrderAll(id);
-//    }
+    @Override
+    public List<Orders> getOrderAll(int itemsId) {
+        return itemsMapper.orderAll(itemsId);
+    }
 
     @Override
     public Optional<Items> getSelectOne(int itemsId) {
@@ -68,10 +68,10 @@ public class ItemServiceImpl implements ItemsService{
     }
 
 
-    @Override
-    public List<Orders> orderAll() {
-        return itemsMapper.orderAll();
-    }
+//    @Override
+//    public List<Orders> orderAll() {
+//        return itemsMapper.orderAll();
+//    }
 
     @Override
     public void itemRequestOrder(Items items) {

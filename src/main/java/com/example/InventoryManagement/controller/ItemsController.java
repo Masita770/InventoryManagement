@@ -36,8 +36,8 @@ public class ItemsController {
     }
 
     // TODO: rest処理で実行するべし
-    @GetMapping("orderList")
-    public String orderAll(@RequestParam(value = "itemsId") int itemsId, Model model) {
+    @GetMapping("orderList/{id}")
+    public String orderAll(@PathVariable("id") int itemsId, Model model) {
         List<Orders> orders = itemsService.getOrderAll(itemsId);
         model.addAttribute("orders", orders);
 //        Optional<Orders> orders = itemsService.getOrderAll(itemsId);
