@@ -4,10 +4,8 @@ package com.example.InventoryManagement.controller;
 import com.example.InventoryManagement.domain.Items;
 import com.example.InventoryManagement.domain.Orders;
 import com.example.InventoryManagement.service.ItemsService;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,10 +38,6 @@ public class ItemsController {
     public String orderAll(@PathVariable("id") int itemsId, Model model) {
         List<Orders> orders = itemsService.getOrderAll(itemsId);
         model.addAttribute("orders", orders);
-//        Optional<Orders> orders = itemsService.getOrderAll(itemsId);
-//        orders.ifPresentOrElse(inside -> model.addAttribute("orders", orders), () ->
-//                model.addAttribute("requestError", orders)
-//        );
         return "items/orderList";
     }
 
@@ -108,5 +102,22 @@ public class ItemsController {
 //        int orderDate = orders.getOrderDate();
         itemsService.orderAdd(orders);
         return "items/itemOrderEdit";
+    }
+
+    @RequestMapping("orderDelete/{ordersId}")
+    public String orderDelete(@PathVariable("ordersId")int ordersId, Model model, Orders orders) {
+        Optional<Orders> orderSelect = itemsService.orderOne(ordersId);
+        orderSelect.ifPresentOrElse(inside -> {
+            model.addAttribute("orderDelete", inside);
+        }, () -> {
+            System.out.println("削除失敗");
+        });
+        return "/items/orderDelete";
+    }
+    @GetMapping("deletedEdit/{ordersId}")
+//    @GetMapping("deletedEdit")
+    public String deletedEdit(@ModelAttribute Orders orders) {
+        itemsService.orderDelete(orders);
+        return "items/deletedEdit";
     }
 }

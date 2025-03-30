@@ -29,7 +29,9 @@ public interface ItemsService {
     void orderAdd(Orders orders);
 
     @Transactional
-    void itemOrderDelete(Items delete);
+    Optional<Orders> orderOne(int ordersId);
+    @Transactional
+    void orderDelete(Orders delete);
 
 
     @Transactional

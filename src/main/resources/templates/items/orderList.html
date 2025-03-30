@@ -31,6 +31,9 @@
 
         <th th:text="${orders.orderDate}"></th>
 
+        <th th:text="${orders.deliveryDate}"></th>
+
+        <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderDelete/{ordersId}(ordersId=${orders.ordersId})}">注文取消</a></td>
 
         </tr>
     </div>

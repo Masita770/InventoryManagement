@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>user home</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>UserHome</h1>
+    <h2>本当に消しますか</h2>
+    <div th:object="${orderDelete}">
+        <div class="form-row">
+            <label class="control-label">注文ID: </label>
+            <p class="form-control" th:text="*{ordersId}"></p>
+        </div>
+        <div class="form-row">
+            <label class="control-label">製品ID</label>
+            <p class="form-control" th:text="*{itemsId}"></p>
+        </div>
+        <div class="form-row">
+            <label class="control-label">注文数</label>
+            <p class="form-control" th:text="*{orderDate}"></p>
+        </div>
+<!--        <a class="btn btn-outline-success btn-sm" th:href="@{items/deletedEdit/{ordersId}(ordersId=*{ordersId})}">削除</a>-->
+        <a class="btn btn-outline-success btn-sm" th:href="@{/items/deletedEdit/{ordersId}(ordersId=*{ordersId})}">削除</a>
+<!--        <a class="btn btn-outline-success btn-sm" th:href="/items/deletedEdit">削除</a>-->
+        </div>
+</div>
+</div>
+<div id="righttext">
+    <a class="btn btn-link" id ="linktext" href="/product/list">一覧画面</a>
+</div>
+</body>

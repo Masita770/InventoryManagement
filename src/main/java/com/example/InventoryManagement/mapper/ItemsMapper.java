@@ -20,10 +20,9 @@ public interface ItemsMapper {
     void itemAdd(Items items);
 
     void orderAdd(Orders orders);
-    Orders orderOne(int orderId);
 
-
-    void deleteOrder(Items delete);
+    Optional<Orders> orderOne(int ordersId);
+    void orderDelete(Orders orders);
 
 
     List<Items> orderSelect();
