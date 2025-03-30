@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface ItemsService {
 
-
+//item全件取得処理
     List<Items> getSelectAll();
 
 //    Optional<Items> getItemOrderAll(int id);
@@ -18,6 +18,7 @@ public interface ItemsService {
     @Transactional
     Optional<Items> getSelectOne(int itemsId);
 
+    // 製品ごとの注文全件表示
     @Transactional
     List<Orders> getOrderAll(int itemsId);
 
@@ -29,7 +30,9 @@ public interface ItemsService {
     void orderAdd(Orders orders);
 
     @Transactional
-    void itemOrderDelete(Items delete);
+    Optional<Orders> orderOne(int ordersId);
+    @Transactional
+    void orderDelete(Orders delete);
 
 
     @Transactional

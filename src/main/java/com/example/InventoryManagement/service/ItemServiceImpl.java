@@ -56,8 +56,12 @@ public class ItemServiceImpl implements ItemsService{
 
 
     @Override
-    public void itemOrderDelete(Items delete) {
-        itemsMapper.deleteOrder(delete);
+    public Optional<Orders> orderOne(int ordersId) {
+        return itemsMapper.orderOne(ordersId);
+    }
+    @Override
+    public void orderDelete(Orders delete) {
+        itemsMapper.orderDelete(delete);
     }
 
 

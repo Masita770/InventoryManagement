@@ -73,6 +73,13 @@
     </select>
 
 
+    <select id="orderOne" resultMap="orderMap">
+        SELECT * FROM orders WHERE orders_id = #{ordersId}
+    </select>
+    <delete id="orderDelete" parameterType="com.example.InventoryManagement.domain.Orders">
+        DELETE FROM orders WHERE orders_id = #{ordersId}
+    </delete>
+
 
     <resultMap type="com.example.InventoryManagement.domain.Items" id="itemsMap">
         <id property="itemsId" column="items_id" />
