@@ -3,6 +3,7 @@ package com.example.InventoryManagement.controller;
 
 import com.example.InventoryManagement.domain.Items;
 import com.example.InventoryManagement.domain.Orders;
+import com.example.InventoryManagement.form.OrderRequestForm;
 import com.example.InventoryManagement.service.ItemsService;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +102,13 @@ public class ItemsController {
 //        int itemsId = orders.getItemsId();
 //        int orderDate = orders.getOrderDate();
         itemsService.orderAdd(orders);
+        return "items/itemOrderEdit";
+    }
+
+    //TODO 2025/04/22 Formクラスに作成していく
+    @PostMapping("itemOrderEdit")
+    public String a(@ModelAttribute OrderRequestForm form, Model model) {
+        model.addAttribute("order", form.getOrderDate());
         return "items/itemOrderEdit";
     }
 

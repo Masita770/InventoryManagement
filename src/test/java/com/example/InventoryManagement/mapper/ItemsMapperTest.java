@@ -92,6 +92,13 @@ class ItemsMapperTest {
 
     @Test
     void updateTest() throws Exception{
-        
     }
+
+
+    @Test
+    @DataSet(value = "deleteTest.yml")
+    @ExpectedDataSet(value = "deleteTest_expected.yml")
+    void deleteTest() {
+        itemsMapper.orderDelete(new Orders(2, 1, 20, "2025-03-20 23:49:23"));
+        }
 }

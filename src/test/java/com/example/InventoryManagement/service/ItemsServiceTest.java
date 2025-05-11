@@ -2,6 +2,7 @@ package com.example.InventoryManagement.service;
 
 
 import com.example.InventoryManagement.domain.Items;
+import com.example.InventoryManagement.domain.Orders;
 import com.example.InventoryManagement.domain.Stocks;
 import com.example.InventoryManagement.mapper.ItemsMapper;
 import org.assertj.core.api.Assertions;
@@ -37,5 +38,12 @@ public class ItemsServiceTest {
         List<Items> actual = itemsService.getSelectAll();
         Assertions.assertThat(actual).isEqualTo(itemsList);
         verify(itemsMapper, times(1)).itemsSelectAll();
+    }
+
+    // TODO 削除処理のテストを完成させる
+    @Test
+    void 選択したデータを削除できるか検証() {
+        Orders orders = new Orders(2, 1, 20, "2025-03-20 23:49:23");
+//        doReturn()
     }
 }
