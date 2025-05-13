@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
@@ -40,10 +41,13 @@ public class ItemsServiceTest {
         verify(itemsMapper, times(1)).itemsSelectAll();
     }
 
-    // TODO 削除処理のテストを完成させる
+    // TODO 削除処理のテストでitemsMapperが呼び出されない理由を調べる
     @Test
     void 選択したデータを削除できるか検証() {
         Orders orders = new Orders(2, 1, 20, "2025-03-20 23:49:23");
-//        doReturn()
+        doReturn(Optional.of(orders)).when(itemsMapper).orderOne(2);
+        doNothing().when(itemsMapper).orderDelete(orders);
+//        itemsService.orderDelete(orders);
+        verify(itemsMapper, times(1)).orderDelete(orders);
     }
 }
