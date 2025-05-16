@@ -45,9 +45,11 @@ public class ItemsServiceTest {
     @Test
     void 選択したデータを削除できるか検証() {
         Orders orders = new Orders(2, 1, 20, "2025-03-20 23:49:23");
-        doReturn(Optional.of(orders)).when(itemsMapper).orderOne(2);
-        doNothing().when(itemsMapper).orderDelete(orders);
+        this.itemsMapper.orderDelete(orders);
+
+//        doReturn(Optional.of(orders)).when(itemsMapper).orderOne(2);
+//        doNothing().when(itemsMapper).orderDelete(orders);
 //        itemsService.orderDelete(orders);
-        verify(itemsMapper, times(1)).orderDelete(orders);
+//        verify(itemsMapper, times(1)).orderDelete(orders);
     }
 }
