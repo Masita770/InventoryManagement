@@ -3,7 +3,6 @@ package com.example.InventoryManagement.service;
 
 import com.example.InventoryManagement.domain.Items;
 import com.example.InventoryManagement.domain.Orders;
-import com.example.InventoryManagement.domain.Stocks;
 import com.example.InventoryManagement.mapper.ItemsMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,9 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
