@@ -13,7 +13,7 @@
 </head>
 <body>
 <h2>Hello, world!</h2>
-<table class="table">
+<table class="table  table-striped">
     <thead>
     <tr>
 
@@ -28,10 +28,10 @@
     </tr>
     </thead>
     <tbody>
-    <div class="list">
+    <div class="d-flex align-items-center">
         <tr th:each="item : ${items}">
 
-            <th th:text="${item.itemsId}"></th>
+            <th th:scope="row" th:text="${item.itemsId}"></th>
 
             <th th:text="${item.category}"></th>
 
