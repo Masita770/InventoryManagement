@@ -106,11 +106,11 @@ public class ItemsController {
     }
 
     //TODO 2025/04/22 Formクラスに作成していく
-    @PostMapping("itemOrderEdit")
-    public String a(@ModelAttribute OrderRequestForm form, Model model) {
-        model.addAttribute("order", form.getOrderDate());
-        return "items/itemOrderEdit";
-    }
+//    @PostMapping("itemOrderEdit")
+//    public String a(@ModelAttribute OrderRequestForm form, Model model) {
+//        model.addAttribute("order", form.getOrderDate());
+//        return "items/itemOrderEdit";
+//    }
 
     @RequestMapping("orderDelete/{ordersId}")
     public String orderDelete(@PathVariable("ordersId")int ordersId, Model model, Orders orders) {

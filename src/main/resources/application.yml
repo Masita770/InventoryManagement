@@ -22,3 +22,4 @@ spring:
 mybatis:
   mapper-locations: classpath*:/com/example/InventoryManagement/mapper/*.xml
 
+debug: true
