@@ -13,7 +13,7 @@
 </head>
 <body>
 <h2>在庫管理</h2>
-<table class="table  table-striped">
+<table class="table  table-striped table-bordered">
     <thead>
     <tr class="p-3 mb-2 bg-light text-dark">
 
@@ -23,6 +23,8 @@
         <th id="registrationDate">登録日</th>
         <th id="quantity">注文数一覧</th>
         <th id="deletedDate">廃番日</th>
+        <th>発注数</th>
+        <th>注文一覧</th>
 
 
     </tr>
@@ -39,9 +41,11 @@
 
             <th th:text="${item.registrationDate}"></th>
 
-            <td><a class="btn btn-outline-primary btn-sm" th:href="@{itemDetail/{id}(id=${item.itemsId})}">参照</a></td>
+            <th><a class="btn btn-outline-primary btn-sm" th:href="@{itemDetail/{id}(id=${item.itemsId})}">参照</a></th>
+
+            <th th:text="${item.deletedDate"></th>
 <!--            </tr>-->
-            <td><a class="btn btn-outline-primary btn-sm" th:href="@{orderList/{id}(id=${item.itemsId})}">注文数一覧</a></td>
+            <th><a class="btn btn-outline-primary btn-sm" th:href="@{orderList/{id}(id=${item.itemsId})}">注文数一覧</a></th>
 <!--            <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderForm}">製品注文</a></td>-->
 
 
