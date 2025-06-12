@@ -21,10 +21,10 @@
         <th id="category">カテゴリ</th>
         <th id="item">製品</th>
         <th id="registrationDate">登録日</th>
-        <th id="quantity">注文数一覧</th>
+<!--        <th id="quantity">注文数一覧</th>-->
         <th id="deletedDate">廃番日</th>
-        <th>発注数</th>
-        <th>注文一覧</th>
+<!--        <th>発注数</th>-->
+        <th>注文数一覧</th>
 
 
     </tr>
@@ -41,9 +41,9 @@
 
             <th th:text="${item.registrationDate}"></th>
 
-            <th><a class="btn btn-outline-primary btn-sm" th:href="@{itemDetail/{id}(id=${item.itemsId})}">参照</a></th>
+<!--            <th><a class="btn btn-outline-primary btn-sm" th:href="@{itemDetail/{id}(id=${item.itemsId})}">参照</a></th>-->
 
-            <th th:text="${item.deletedDate"></th>
+            <th th:text="${item.deletedDate}"></th>
 <!--            </tr>-->
             <th><a class="btn btn-outline-primary btn-sm" th:href="@{orderList/{id}(id=${item.itemsId})}">注文数一覧</a></th>
 <!--            <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderForm}">製品注文</a></td>-->
