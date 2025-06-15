@@ -3,6 +3,7 @@ package com.example.InventoryManagement.service;
 
 import com.example.InventoryManagement.domain.Items;
 import com.example.InventoryManagement.domain.Orders;
+import com.example.InventoryManagement.form.OrderRequestForm;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public interface ItemsService {
 //    @Transactional
     void requestItemAdd(Items items);
 
+    void orderForm(OrderRequestForm orderRequestForm);
 
     @Transactional
     void orderAdd(Orders orders);

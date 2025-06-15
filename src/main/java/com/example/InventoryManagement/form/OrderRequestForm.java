@@ -11,7 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class OrderRequestForm {
 
+    @NotNull
     private int ordersId;
+
+    @NotNull
     private int itemsId;
     @Pattern(regexp = "^[0-9]*$")
     @NotNull
