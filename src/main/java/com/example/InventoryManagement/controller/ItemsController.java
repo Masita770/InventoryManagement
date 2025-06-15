@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -93,7 +94,7 @@ public class ItemsController {
 
     //TODO: ordersに登録しようとして、itemsに行ってしまう理由を探す。
     @PostMapping("itemOrderEdit")
-    public String orderRequest(@ModelAttribute Orders orders, BindingResult bindingResult) {
+    public String orderRequest(@Validated OrderRequestForm orderRequestForm, @ModelAttribute Orders orders, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
 //            List<Orders> i = itemsService.orderAll();
 //            model.addAttribute("i", i);
@@ -128,4 +129,7 @@ public class ItemsController {
         itemsService.orderDelete(orders);
         return "items/deletedEdit";
     }
+
+
+
 }

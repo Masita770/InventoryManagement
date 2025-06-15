@@ -3,6 +3,7 @@ package com.example.InventoryManagement.service;
 
 import com.example.InventoryManagement.domain.Items;
 import com.example.InventoryManagement.domain.Orders;
+import com.example.InventoryManagement.form.OrderRequestForm;
 import com.example.InventoryManagement.mapper.ItemsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,14 @@ public class ItemServiceImpl implements ItemsService{
 //    public void itemOrderAdd(Orders orders) {
 //        itemsMapper.itemOrderAdd(orders);
 //    }
+    @Override
+    public void orderForm(OrderRequestForm orderRequestForm) {
+        Orders orders = new Orders();
+        orders.setItemsId(orderRequestForm.getItemsId());
+        orders.setOrderDate(orderRequestForm.getOrderDate());
+        orders.setDeliveryDate(orderRequestForm.getDeliveryDate());
+        itemsMapper.orderAdd(orders);
+    }
 
 
     @Override
