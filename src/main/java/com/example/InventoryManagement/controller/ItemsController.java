@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
@@ -87,10 +88,18 @@ public class ItemsController {
 
 
 
-    @GetMapping("orderForm")
-    public String newOrder(Model model) {
-        return "items/orderForm";
-    }
+//    @GetMapping("orderForm")
+//    public ModelAndView newOrder(@ModelAttribute OrderRequestForm orderRequestForm,
+//                                 ModelAndView mav) {
+//        mav.setViewName("items/orderForm");
+//        mav.addObject(orderRequestForm.getItemsId());
+//        mav.addObject(orderRequestForm.getOrderDate());
+//        return mav;
+//    }
+//    @GetMapping("orderForm")
+//    public String newOrder(Model model) {
+//        return "items/orderForm";
+//    }
 
     //TODO: ordersに登録しようとして、itemsに行ってしまう理由を探す。
     @PostMapping("itemOrderEdit")
