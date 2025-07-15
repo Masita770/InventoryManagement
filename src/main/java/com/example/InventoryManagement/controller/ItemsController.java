@@ -96,18 +96,16 @@ public class ItemsController {
 //        mav.addObject(orderRequestForm.getOrderDate());
 //        return mav;
 //    }
-//    @GetMapping("orderForm")
-//    public String newOrder(Model model) {
-//        return "items/orderForm";
-//    }
+    @GetMapping("orderForm")
+    public String newOrder(Model model) {
+        return "items/orderForm";
+    }
 
     //TODO: ordersに登録しようとして、itemsに行ってしまう理由を探す。
     @PostMapping("itemOrderEdit")
     public String orderRequest(@Validated OrderRequestForm orderRequestForm, @ModelAttribute Orders orders, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-//            List<Orders> i = itemsService.orderAll();
-//            model.addAttribute("i", i);
-            return "items/index";
+            return "items/error";
         }
 //        int itemsId = orders.getItemsId();
 //        int orderDate = orders.getOrderDate();
