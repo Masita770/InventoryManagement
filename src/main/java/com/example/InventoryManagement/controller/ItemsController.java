@@ -41,7 +41,7 @@ public class ItemsController {
     public String orderAll(@PathVariable("id") int itemsId, Model model) {
         List<Orders> orders = itemsService.getOrderAll(itemsId);
         model.addAttribute("orders", orders);
-        return "items/orderList";
+        return "items/form";
     }
 
 
@@ -63,16 +63,23 @@ public class ItemsController {
         return "items/form";
     }
 
-    @PostMapping("itemRequestEdit")
-    public String formItemAdd(@ModelAttribute Items items, BindingResult bindingResult, Model model) {
-        if(bindingResult.hasErrors()) {
-            List<Items> itemsList = itemsService.getSelectAll();
-            model.addAttribute("item", itemsList);
-            return "items/form";
-        }
-        itemsService.requestItemAdd(items);
-        return "redirect:index";
-    }
+//    GetMapping("itemRequestEdit/{id}")
+//        public String formItemAdd(@PathVariable("id") int itemsId, BindingResult bindingResult, Model model, Items items) {
+//        if(bindingResult.hasErrors()) {
+//            Optional<Items> itemsList = itemsService.getSelectOne(itemsId);
+//        }
+//        model.addAttribute("select", items);
+//        }
+//    @PostMapping("itemRequestEdit")
+//    public String formItemAdd(@ModelAttribute Items items, BindingResult bindingResult, Model model) {
+//        if(bindingResult.hasErrors()) {
+//            List<Items> itemsList = itemsService.getSelectAll();
+//            model.addAttribute("item", itemsList);
+//            return "items/form";
+//        }
+//        itemsService.requestItemAdd(items);
+//        return "redirect:index";
+//    }
 
 
     @GetMapping("itemQuantityUpdate/{id}")
