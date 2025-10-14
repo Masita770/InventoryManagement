@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
-@RequestMapping("/items")
-public class OrdersController {
+//@Controller
+//@RequestMapping("/items")
+//public class OrdersController {
+//
+//    private ItemsService itemsService;
 
-    private ItemsService itemsService;
-
-    @GetMapping("orderForm")
-    public ModelAndView newOrder(@ModelAttribute OrderRequestForm orderRequestForm,
-                                 ModelAndView mav, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
-            return mav;
-        }
-        mav.setViewName("items/orderForm");
-        mav.addObject(orderRequestForm.getItemsId());
-        mav.addObject(orderRequestForm.getOrderDate());
-        return mav;
-    }
-}
+//    @GetMapping("orderForm")
+//    public ModelAndView newOrder(@ModelAttribute OrderRequestForm orderRequestForm,
+//                                 ModelAndView mav, BindingResult bindingResult) {
+//        if(bindingResult.hasErrors()) {
+//            return mav;
+//        }
+//        mav.setViewName("items/orderForm");
+//        mav.addObject(orderRequestForm.getItemsId());
+//        mav.addObject(orderRequestForm.getOrderDate());
+//        return mav;
+//    }
+//}
