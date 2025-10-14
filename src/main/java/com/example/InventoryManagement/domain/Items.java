@@ -27,11 +27,7 @@ public class Items {
         this.item = item;
         this.registrationDate = registrationDate;
         this.deletedDate = deletedDate;
-        this.stocksList = stocksList;
-        this.ordersList = ordersList;
-        this.ordersList = ordersList;
     }
 
-//    public Items(int itemsId) {
-//    }
+
 }
