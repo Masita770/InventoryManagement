@@ -6,12 +6,12 @@
 
     <select id="itemsSelectAll" resultMap="itemsMap">
 <!--    <select id="itemsSelectAll" resultType="com.example.InventoryManagement.domain.Items">-->
-        SELECT * FROM orders
+        SELECT * FROM items
 <!--        SELECT items.items_id, items.category, items.item, items.registration_date, items.deleted_date,-->
 <!--        stocks.stocks_id, stocks.items_id, stocks.quantity,-->
 <!--        orders.order_id, orders.items_id, orders.order_date FROM items-->
 <!--        LEFT JOIN stocks ON items.items_id = stocks.items_id-->
-        LEFT JOIN items ON items.items_id = orders.items_id
+        LEFT JOIN orders ON items.items_id = orders.items_id
     </select>
     <select id="orderAll" resultMap="orderMap">
         SELECT * FROM orders JOIN items ON items.items_id = orders.items_id WHERE orders.items_id = #{itemsId}
