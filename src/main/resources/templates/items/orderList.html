@@ -35,12 +35,13 @@
 
         <th th:text="${orders.deliveryDate}"></th>
 
-        <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderForm}">製品注文</a></td>
-
         <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderDelete/{ordersId}(ordersId=${orders.ordersId})}">注文取消</a></td>
 
         </tr>
+
     </div>
+    <td><a class="btn btn-outline-primary btn-sm" th:href="@{/items/orderForm}">製品注文</a></td>
+
     </tbody>
 </table>
 

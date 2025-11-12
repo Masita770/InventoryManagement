@@ -41,7 +41,7 @@ public class ItemsController {
     public String orderAll(@PathVariable("id") int itemsId, Model model) {
         List<Orders> orders = itemsService.getOrderAll(itemsId);
         model.addAttribute("orders", orders);
-        return "items/form";
+        return "items/orderList";
     }
 
 
@@ -110,9 +110,14 @@ public class ItemsController {
 
     //TODO: ordersに登録しようとして、itemsに行ってしまう理由を探す。
     @PostMapping("itemOrderEdit")
-    public String orderRequest(@Validated OrderRequestForm orderRequestForm, @ModelAttribute Orders orders, BindingResult bindingResult) {
+    public String orderRequest(@Validated OrderRequestForm orderRequestForm,
+                               @ModelAttribute Orders orders,
+                               BindingResult bindingResult,
+                               Model model) {
         if(bindingResult.hasErrors()) {
-            return "items/error";
+            List<Items> getAll = itemsService.getSelectAll();
+            model.addAttribute("items", getAll);
+            return "items/index";
         }
 //        int itemsId = orders.getItemsId();
 //        int orderDate = orders.getOrderDate();
