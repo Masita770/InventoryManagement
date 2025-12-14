@@ -7,6 +7,8 @@ import com.example.InventoryManagement.form.OrderRequestForm;
 import com.example.InventoryManagement.service.ItemsService;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -111,13 +114,13 @@ public class ItemsController {
     //TODO: ordersに登録しようとして、itemsに行ってしまう理由を探す。
     @PostMapping("itemOrderEdit")
     public String orderRequest(@Validated OrderRequestForm orderRequestForm,
-                               @ModelAttribute Orders orders,
+                               @ModelAttribute("orders") Orders orders,
                                BindingResult bindingResult,
                                Model model) {
         if(bindingResult.hasErrors()) {
-            List<Items> getAll = itemsService.getSelectAll();
-            model.addAttribute("items", getAll);
-            return "items/index";
+//            List<Items> getAll = itemsService.getSelectAll();
+//            model.addAttribute("items", getAll);
+            return "/items/error";
         }
 //        int itemsId = orders.getItemsId();
 //        int orderDate = orders.getOrderDate();
@@ -150,5 +153,13 @@ public class ItemsController {
     }
 
 
+//    @ExceptionHandler(IOException.class)
+//    public String handleNullPointException(NullPointerException ex, Model model) {
+//        model.addAttribute("errorMessage", "内部エラーが発生しました。");
+//        return "items/error";
+////    public ResponseEntity<String> handleAllException(Exception exception) {
+////        return new ResponseEntity<>("この値は存在しません" + exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+////        return ResponseEntity.internalServerError().body("入力が間違っている、あるいは対象の製品は存在しません。");
+//    }
 
 }
