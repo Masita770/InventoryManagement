@@ -28,6 +28,4 @@ public class Items {
         this.registrationDate = registrationDate;
         this.deletedDate = deletedDate;
     }
-
-
 }

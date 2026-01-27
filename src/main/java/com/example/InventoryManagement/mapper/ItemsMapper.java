@@ -15,7 +15,7 @@ public interface ItemsMapper {
 
     List<Orders> orderAll(int itemsId);
 
-    Optional<Items> itemsSelectOne(int itemId);
+    Optional<Items> itemsSelectOne(int itemsId);
 
     void itemAdd(Items items);
 
