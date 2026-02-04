@@ -5,12 +5,7 @@
 <mapper namespace="com.example.InventoryManagement.mapper.ItemsMapper">
 
     <select id="itemsSelectAll" resultMap="itemsMap">
-<!--    <select id="itemsSelectAll" resultType="com.example.InventoryManagement.domain.Items">-->
         SELECT * FROM items
-<!--        SELECT items.items_id, items.category, items.item, items.registration_date, items.deleted_date,-->
-<!--        stocks.stocks_id, stocks.items_id, stocks.quantity,-->
-<!--        orders.order_id, orders.items_id, orders.order_date FROM items-->
-<!--        LEFT JOIN stocks ON items.items_id = stocks.items_id-->
         LEFT JOIN orders ON items.items_id = orders.items_id
     </select>
     <select id="orderAll" resultMap="orderMap">
@@ -44,29 +39,8 @@
     </update>
 
     <insert id="orderAdd" useGeneratedKeys="true" keyProperty="ordersId" parameterType="com.example.InventoryManagement.domain.Orders">
-        <!--    <select id="orderAdd" resultType="com.example.InventoryManagement.domain.Orders">-->
         INSERT INTO orders(items_id, order_date) VALUES (#{itemsId},#{orderDate})
-        <!--        <selectKey resultType="com.example.InventoryManagement.domain.Orders" keyProperty="id" order="AFTER">-->
-        <!--            SELECT items.item_id, items.category, items.item, items.registration_date, items.deleted_date,-->
-        <!--            stocks.stock_id, stocks.items_id, stocks.quantity,-->
-        <!--            orders.id, orders.stocks_id, orders.order_date-->
-        <!--            FROM items-->
-        <!--            LEFT JOIN stocks ON items.item_id = stocks.items_id-->
-        <!--            LEFT JOIN orders ON items.item_id = orders.items_id-->
-        <!--            WHERE items.item_id = #{itemId}-->
-        <!--        </selectKey>-->
     </insert>
-<!--    &lt;!&ndash;    <insert id="orderAdd" useGeneratedKeys="true">&ndash;&gt;-->
-<!--    &lt;!&ndash;        INSERT INTO orders(id, stocks_id, order_date) VALUES (#{id}, #{stocksId}, #{orderDate})&ndash;&gt;-->
-<!--    &lt;!&ndash;        <selectKey keyProperty="orders.id" resultType="com.example.InventoryManagement.domain.Items" order="AFTER">&ndash;&gt;-->
-<!--    &lt;!&ndash;            SELECT items.id, stocks.id, stocks.items_id, stocks.quantity,&ndash;&gt;-->
-<!--    &lt;!&ndash;            orders.id, orders.stocks_id, orders.order_date FROM items&ndash;&gt;-->
-<!--    &lt;!&ndash;            LEFT JOIN stocks ON items.id = stocks.items_id&ndash;&gt;-->
-<!--    &lt;!&ndash;            LEFT JOIN orders ON stocks.id = orders.stocks_id&ndash;&gt;-->
-<!--    &lt;!&ndash;            WHERE items.id = #{id}&ndash;&gt;-->
-<!--    &lt;!&ndash;        </selectKey>&ndash;&gt;-->
-<!--    &lt;!&ndash;    </insert>&ndash;&gt;-->
-
 
     <select id="orderSelect" resultMap="itemsMap">
         SELECT items.items_id, items.category, items.item, items.registration_date, items.deleted_date, stocks.stocks_id, stocks.items_id, stocks.quantity FROM items  INNER JOIN stocks ON items.id = stocks.items_id
@@ -83,8 +57,6 @@
 
     <resultMap type="com.example.InventoryManagement.domain.Items" id="itemsMap">
         <id property="itemsId" column="items_id" />
-<!--        <result property="category" column="category" />-->
-<!--        <result property="item" column="item" />-->
         <result property="category" column="category" jdbcType="VARCHAR" javaType="String" />
         <result property="item" column="item" jdbcType="VARCHAR" javaType="String" />
         <result property="registrationDate" column="registration_date" />

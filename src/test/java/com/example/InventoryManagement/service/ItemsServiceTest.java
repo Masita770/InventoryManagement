@@ -28,7 +28,7 @@ public class ItemsServiceTest {
 
 
     @Test
-    void データ一覧を取得できるか検証() {
+    void 製品一覧を全件取得できるか検証() {
         List<Items> itemsList = List.of(
                 new Items(1, "机", "オフィスデスク", "0000-00-00 00:00:00","0000-00-00 00:00:00"),
                 new Items(2, "机", "オフィスデスク", "0000-00-00 00:00:00", "0000-00-00 00:00:00"),
